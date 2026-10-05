@@ -79,7 +79,7 @@
         insiderTip: "Check northbound local train return timetables at Bao'an Station upon arrival to pace your visit smoothly.",
         lat: 22.9345,
         lng: 120.2260,
-        officialUrl: "https://www.chimeimuseum.org/en"
+        officialUrl: "https://www.chimeimuseum.org/"
       },
       {
         id: "pier-2",
@@ -94,7 +94,7 @@
         insiderTip: "Rent a Ubike at Yanchengpu Station to coast along the waterfront bike trail seamlessly towards Great Harbor Bridge.",
         lat: 22.6199,
         lng: 120.2815,
-        officialUrl: "https://pier2.org/en/"
+        officialUrl: "https://khh.travel/en/attractions/detail/22"
       },
       {
         id: "tainan-heritage",
@@ -109,7 +109,7 @@
         insiderTip: "Old town roads are narrow; watch for mixed scooter traffic when walking or cycling through alleys.",
         lat: 22.9975,
         lng: 120.2025,
-        officialUrl: "https://www.twtainan.net/en"
+        officialUrl: "https://www.twtainan.net/en/attractions/detail/580"
       },
       {
         id: "lotus-pond",
@@ -139,7 +139,7 @@
         insiderTip: "Independent local eateries may only have Chinese chalkboards; photo-ordering or translation tools work best.",
         lat: 22.6775,
         lng: 120.4862,
-        officialUrl: "https://vipzone.cultural.pthg.gov.tw"
+        officialUrl: "https://eng.taiwan.net.tw/m1.aspx?sNo=0002122&id=A12-00445"
       },
       {
         id: "weiwuying",
@@ -154,7 +154,7 @@
         insiderTip: "The outdoor Banyan Plaza is completely free and sheltered—perfect for cooling off on hot afternoons.",
         lat: 22.6247,
         lng: 120.3435,
-        officialUrl: "https://www.npac-weiwuying.org/index?lang=en"
+        officialUrl: "https://khh.travel/en/attractions/detail/29"
       },
       {
         id: "fo-guang-shan",
@@ -169,7 +169,7 @@
         insiderTip: "Take the Harvard Express bus from Zuoying Station rather than local bus routes to save over 40 minutes.",
         lat: 22.7565,
         lng: 120.4475,
-        officialUrl: "https://www.fgsbmc.org.tw/en/index.aspx"
+        officialUrl: "https://khh.travel/en/attractions/detail/26"
       },
       {
         id: "hinoki-village",
@@ -184,7 +184,7 @@
         insiderTip: "Combine this with the nearby Alishan Forest Railway Garage Park across the street for vintage steam locomotives.",
         lat: 23.4870,
         lng: 120.4552,
-        officialUrl: "https://travel.chiayi.gov.tw/travel-content?id=104&lang=en"
+        officialUrl: "https://eng.taiwan.net.tw/m1.aspx?sNo=0002117&id=A12-00361"
       }
     ];
 
@@ -193,7 +193,6 @@
       container.innerHTML = "";
       
       data.forEach(item => {
-        // Generates an auto-locating transit directions link using current GPS location as the origin
         const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${item.lat},${item.lng}&travelmode=transit`;
 
         const card = document.createElement("article");
