@@ -32,8 +32,8 @@
       <!-- Essential Rider Note -->
       <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-slate-600 bg-slate-50 p-4 rounded-xl border border-slate-200">
         <div><strong class="text-slate-800">Transit Pass:</strong> Tap with EasyCard or iPASS for TRA local trains, MRT, and light rail.</div>
-        <div><strong class="text-slate-800">Ubike 2.0:</strong> Single rentals available using credit cards at any kiosk/app.</div>
-        <div><strong class="text-slate-800">Luggage Storage:</strong> Lockers & Baggage Room (行李房) at Kaohsiung Station.</div>
+        <div><strong class="text-slate-800">Ubike 2.0:</strong> Single rentals available using credit cards at any kiosk or mobile app.</div>
+        <div><strong class="text-slate-800">Direct Navigation:</strong> Tap "Get Directions" below to launch Google Maps from your current GPS location.</div>
       </div>
     </div>
   </header>
@@ -47,14 +47,14 @@
         <button onclick="filterDestinations('cross-city-rail')" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold border transition-colors bg-white text-slate-600 border-slate-200 hover:bg-slate-100" data-filter="cross-city-rail">Cross-City Rail (TRA)</button>
         <button onclick="filterDestinations('half-day')" class="filter-btn px-4 py-1.5 rounded-full text-xs font-semibold border transition-colors bg-white text-slate-600 border-slate-200 hover:bg-slate-100" data-filter="half-day">&lt; 4 Hours (Half-Day)</button>
       </div>
-      <div id="result-count" class="text-xs text-slate-500 font-medium">Showing 8 destinations</div>
+      <div id="result-count" class="text-xs text-slate-500 font-medium">Showing destinations</div>
     </div>
   </section>
 
   <!-- Destination Cards Grid -->
   <main class="max-w-5xl mx-auto py-10 px-6 sm:px-12">
     <div id="cards-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <!-- Cards will be populated by JavaScript -->
+      <!-- Cards populated dynamically -->
     </div>
   </main>
 
@@ -77,7 +77,8 @@
         transitSteps: "TRA Local Train Northbound from Kaohsiung Station to Bao'an Station (35 mins) → 15-min walk or 5-min Ubike 2.0 along the park trail.",
         englishFriendliness: "100% English audio guide, multi-language signage, English online ticketing.",
         insiderTip: "Check northbound local train return timetables at Bao'an Station upon arrival to pace your visit smoothly.",
-        mapsUrl: "https://maps.google.com/?cid=12140685655938478438",
+        lat: 22.9345,
+        lng: 120.2260,
         officialUrl: "https://www.chimeimuseum.org/en"
       },
       {
@@ -88,24 +89,26 @@
         duration: "Half-Day (~3-4 hrs)",
         isHalfDay: true,
         tagline: "Dynamic revitalized seaside warehouse district loaded with outdoor installations, galleries, and harbor views.",
-        transitSteps: "MRT Red Line from Kaohsiung Station to Formosa Boulevard → Transfer to Orange Line to Yanchengpu Station (Exit 1) → 5-min walk or ride Kaohsiung LRT to Dayi Pier-2 Station.",
+        transitSteps: "MRT Red Line to Formosa Boulevard → Orange Line to Yanchengpu Station (Exit 1) → 5-min walk or ride Kaohsiung LRT to Dayi Pier-2 Station.",
         englishFriendliness: "High. English park maps, visitor centers, bilingual outdoor art placards.",
         insiderTip: "Rent a Ubike at Yanchengpu Station to coast along the waterfront bike trail seamlessly towards Great Harbor Bridge.",
-        mapsUrl: "https://maps.google.com/?cid=12022830847936181938",
+        lat: 22.6199,
+        lng: 120.2815,
         officialUrl: "https://pier2.org/en/"
       },
       {
         id: "tainan-heritage",
-        title: "Tainan Historic Old Town",
+        title: "Tainan Historic Old Town (Chikan Tower)",
         city: "Tainan City",
         category: "cross-city-rail",
         duration: "Full-Day (~6-8 hrs)",
         isHalfDay: false,
-        tagline: "Taiwan's oldest capital featuring Chikan Tower, Confucius Temple, historic stone lanes, and culinary alleys.",
+        tagline: "Taiwan's oldest capital featuring historic fortress sites, Confucius Temple, and century-old culinary alleys.",
         transitSteps: "TRA Tze-Chiang Express from Kaohsiung Station to Tainan Station (32 mins) → Ubike or City Bus right outside the West Exit.",
         englishFriendliness: "Bilingual municipal signage throughout all major historical fortress and temple complexes.",
         insiderTip: "Old town roads are narrow; watch for mixed scooter traffic when walking or cycling through alleys.",
-        mapsUrl: "https://maps.google.com/?cid=11145100067645167732",
+        lat: 22.9975,
+        lng: 120.2025,
         officialUrl: "https://www.twtainan.net/en"
       },
       {
@@ -119,7 +122,8 @@
         transitSteps: "TRA Local Train Northbound 1 stop to Zuoying (Old Town) Station (5 mins) → 7-min walk or Ubike around the lake path.",
         englishFriendliness: "Multi-language guide boards (EN/JP/CN) at every major pavilion and shrine entry.",
         insiderTip: "Cultural tradition: Enter through the dragon's mouth and exit from the tiger's jaws for good fortune.",
-        mapsUrl: "https://maps.google.com/?cid=9328227092928374941",
+        lat: 22.6803,
+        lng: 120.2917,
         officialUrl: "https://khh.travel/en/attractions/detail/20"
       },
       {
@@ -132,8 +136,9 @@
         tagline: "Taiwan's largest preserved Japanese military dorm cluster, turned into independent craft studios and cafes.",
         transitSteps: "TRA Southbound Express Train from Kaohsiung Station to Pingtung Station (22 mins) → 15-min walk or 6-min Ubike from station plaza.",
         englishFriendliness: "Bilingual historical heritage markers and multi-language visitor center guides.",
-        insiderTip: "Independent local eateries may only have Chinese chalkboards; photo-ordering or Google Lens works best.",
-        mapsUrl: "https://maps.google.com/?cid=7400513812837319985",
+        insiderTip: "Independent local eateries may only have Chinese chalkboards; photo-ordering or translation tools work best.",
+        lat: 22.6775,
+        lng: 120.4862,
         officialUrl: "https://vipzone.cultural.pthg.gov.tw"
       },
       {
@@ -147,7 +152,8 @@
         transitSteps: "MRT Red Line to Formosa Boulevard → Orange Line to Weiwuying Station (Exit 6 directly enters the building).",
         englishFriendliness: "Exceptional. Dedicated English guided tours, bilingual exhibition panels, and English website.",
         insiderTip: "The outdoor Banyan Plaza is completely free and sheltered—perfect for cooling off on hot afternoons.",
-        mapsUrl: "https://maps.google.com/?cid=9845722137684128945",
+        lat: 22.6247,
+        lng: 120.3435,
         officialUrl: "https://www.npac-weiwuying.org/index?lang=en"
       },
       {
@@ -161,7 +167,8 @@
         transitSteps: "MRT Red Line to Zuoying High-Speed Rail Station → Board the Harvard Express Bus (E02) straight to the front gate (35 mins).",
         englishFriendliness: "Comprehensive English service desk, English-speaking volunteer guides, vegetarian food labeling.",
         insiderTip: "Take the Harvard Express bus from Zuoying Station rather than local bus routes to save over 40 minutes.",
-        mapsUrl: "https://maps.google.com/?cid=5132297926836109968",
+        lat: 22.7565,
+        lng: 120.4475,
         officialUrl: "https://www.fgsbmc.org.tw/en/index.aspx"
       },
       {
@@ -175,8 +182,9 @@
         transitSteps: "TRA Tze-Chiang Express Northbound from Kaohsiung Station to Chiayi Station (1 hr 15 mins) → 8-min Ubike or 18-min walk.",
         englishFriendliness: "Bilingual wayfinding and official site guides; very intuitive pedestrian grid.",
         insiderTip: "Combine this with the nearby Alishan Forest Railway Garage Park across the street for vintage steam locomotives.",
-        mapsUrl: "https://maps.google.com/?cid=12140685655938478438",
-        officialUrl: "https://www.hinokivillage.com.tw"
+        lat: 23.4870,
+        lng: 120.4552,
+        officialUrl: "https://travel.chiayi.gov.tw/travel-content?id=104&lang=en"
       }
     ];
 
@@ -185,6 +193,9 @@
       container.innerHTML = "";
       
       data.forEach(item => {
+        // Generates an auto-locating transit directions link using current GPS location as the origin
+        const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${item.lat},${item.lng}&travelmode=transit`;
+
         const card = document.createElement("article");
         card.className = "flex flex-col justify-between bg-white rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md transition-shadow p-6";
         card.innerHTML = `
@@ -213,10 +224,10 @@
           </div>
 
           <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold">
-            <a href="${item.mapsUrl}" target="_blank" rel="noopener noreferrer" class="text-emerald-700 hover:text-emerald-800 flex items-center gap-1">
-              Google Maps ↗
+            <a href="${directionsUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100 transition-colors">
+              <span>📍 Get Directions (Transit) ↗</span>
             </a>
-            <a href="${item.officialUrl}" target="_blank" rel="noopener noreferrer" class="text-slate-700 hover:text-slate-900">
+            <a href="${item.officialUrl}" target="_blank" rel="noopener noreferrer" class="text-slate-600 hover:text-slate-900 transition-colors">
               Official Site ↗
             </a>
           </div>
