@@ -3,331 +3,3548 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>港都選物 GO｜Prototype V2</title>
+
+<title>港都選物 GO｜Prototype V3 · TDX Rail</title>
+
 <style>
 :root{
-  --navy:#0D2B45; --orange:#F47C2A; --teal:#2BB3B1;
-  --cream:#FFF8EF; --ink:#17324A; --muted:#6B7B88; --line:#DDE7EC;
-  --green:#167A52; --yellow:#B57A00; --red:#BE3C38; --bg:#F7FAFB;
+  --navy:#0D2B45;
+  --orange:#F47C2A;
+  --teal:#2BB3B1;
+  --cream:#FFF8EF;
+  --ink:#17324A;
+  --muted:#6B7B88;
+  --line:#DDE7EC;
+  --green:#167A52;
+  --yellow:#B57A00;
+  --red:#BE3C38;
+  --bg:#F7FAFB;
 }
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI","Noto Sans TC",sans-serif}
-a{color:inherit;text-decoration:none}
-button{font:inherit}
-.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.topin{max-width:1180px;margin:auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.brand{display:flex;align-items:baseline;gap:10px;font-weight:900;color:var(--navy)}
-.brand .zh{font-size:22px}.brand .go{font-size:28px;color:var(--orange);font-style:italic}
-.nav{display:flex;gap:8px;flex-wrap:wrap}.nav button{border:1px solid var(--line);background:white;border-radius:999px;padding:8px 12px;font-weight:800;color:var(--navy);cursor:pointer}
-.wrap{max-width:1180px;margin:auto;padding:30px 20px 60px}
-.hero{display:grid;grid-template-columns:1.3fr .7fr;gap:24px;align-items:end;padding:26px 0 16px}
-.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:900;color:var(--teal)}
-h1{margin:8px 0 12px;font-size:clamp(38px,7vw,74px);line-height:.98;letter-spacing:-.045em;color:var(--navy)}
-.lede{font-size:19px;line-height:1.55;color:#43596a;margin:0}
-.notehero{background:var(--cream);border:1px solid #F2D2B5;border-radius:22px;padding:18px;line-height:1.5}
-.notehero b{color:var(--orange)}
-.panel{background:white;border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:0 10px 30px rgba(13,43,69,.05);margin:16px 0}
-.panel h2{margin:0 0 6px;color:var(--navy);font-size:25px}.sub{margin:0 0 16px;color:var(--muted);line-height:1.5}
-.timegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.timebtn{border:2px solid transparent;border-radius:18px;padding:18px;background:#EEF8FA;text-align:left;cursor:pointer}
-.timebtn.active{border-color:var(--teal);background:#E5F8F7}.timebtn .n{display:block;font-size:30px;font-weight:900;color:var(--navy)}
-.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.pill{padding:6px 9px;border-radius:999px;border:1px solid var(--line);font-size:12px;font-weight:800;background:#F8FAFB}
-.pill.live{background:#EAF7F1;color:var(--green);border-color:#BEE2CE}.pill.warn{background:#FFF5E3;color:#925900;border-color:#EFD39F}
-.segment{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 18px}.segment button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 12px;font-weight:800;cursor:pointer}
-.segment button.active{background:var(--navy);color:white}
-.transportgrid,.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.transport,.card{border:1px solid var(--line);border-radius:18px;background:#fff;overflow:hidden}
-.transport{padding:16px}.transport .icon{font-size:30px}.transport h3{margin:6px 0}.transport p{font-size:14px;color:var(--muted);line-height:1.45}
-.cardhero{min-height:118px;padding:16px;background:linear-gradient(135deg,var(--teal),var(--navy));color:white;display:flex;flex-direction:column;justify-content:flex-end}
-.cardhero .kicker{font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;opacity:.82}.cardhero h3{margin:3px 0 0;font-size:22px}
-.cardbody{padding:15px;display:flex;flex-direction:column;gap:10px}
-.badge{display:inline-flex;width:max-content;border-radius:999px;padding:5px 8px;font-size:11px;font-weight:900}.green{background:#E8F6EE;color:var(--green)}.yellow{background:#FFF3D6;color:#8D6400}.red{background:#FCE7E5;color:var(--red)}.blue{background:#EAF1F8;color:var(--navy)}
-.meta{display:grid;gap:6px;font-size:13px;color:#536877}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
-.btn{border:none;border-radius:11px;padding:10px 12px;font-weight:900;cursor:pointer;background:var(--navy);color:white;display:inline-flex;align-items:center;justify-content:center}
-.btn.orange{background:var(--orange)}.btn.teal{background:var(--teal)}.btn.ghost{background:white;color:var(--navy);border:1px solid var(--line)}
-.sectionhead{display:flex;align-items:end;justify-content:space-between;gap:14px;flex-wrap:wrap}
-.eventnotice{border:1px dashed #E0B77D;background:#FFF8EC;color:#7A5200;border-radius:14px;padding:12px;font-size:13px;line-height:1.45}
-.filters{display:flex;gap:8px;flex-wrap:wrap}.filters button{border:1px solid var(--line);background:white;border-radius:999px;padding:7px 10px;font-weight:800;cursor:pointer}.filters button.active{background:var(--teal);color:white}
-.empty{padding:18px;border:1px dashed var(--line);border-radius:14px;color:var(--muted);text-align:center;background:#FBFDFE}
-.modal{position:fixed;inset:0;background:rgba(4,25,38,.55);display:none;align-items:center;justify-content:center;padding:20px;z-index:50}.modal.open{display:flex}
-.modalbox{width:min(720px,100%);max-height:90vh;overflow:auto;background:white;border-radius:24px;padding:22px;box-shadow:0 35px 90px rgba(0,0,0,.25)}
-.modalhead{display:flex;justify-content:space-between;gap:12px}.close{border:0;background:#EEF2F4;border-radius:50%;width:36px;height:36px;font-size:20px;cursor:pointer}
-.checks,.steps{display:grid;gap:8px;margin:12px 0}.check,.step{border:1px solid var(--line);border-radius:12px;padding:11px;background:#FBFDFE}.step{border-left:4px solid var(--teal)}
-.small{font-size:12px;color:var(--muted);line-height:1.45}
-.footer{font-size:12px;color:var(--muted);padding:24px 0}
-@media(max-width:850px){.hero{grid-template-columns:1fr}.timegrid,.transportgrid,.cards{grid-template-columns:1fr}}
+
+*{
+  box-sizing:border-box
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    "Noto Sans TC",
+    sans-serif;
+}
+
+a{
+  color:inherit;
+  text-decoration:none
+}
+
+button{
+  font:inherit
+}
+
+.top{
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line)
+}
+
+.topin{
+  max-width:1180px;
+  margin:auto;
+  padding:12px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px
+}
+
+.brand{
+  display:flex;
+  align-items:baseline;
+  gap:10px;
+  font-weight:900;
+  color:var(--navy)
+}
+
+.brand .zh{
+  font-size:22px
+}
+
+.brand .go{
+  font-size:28px;
+  color:var(--orange);
+  font-style:italic
+}
+
+.nav{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap
+}
+
+.nav button{
+  border:1px solid var(--line);
+  background:white;
+  border-radius:999px;
+  padding:8px 12px;
+  font-weight:800;
+  color:var(--navy);
+  cursor:pointer
+}
+
+.wrap{
+  max-width:1180px;
+  margin:auto;
+  padding:30px 20px 60px
+}
+
+.hero{
+  display:grid;
+  grid-template-columns:1.3fr .7fr;
+  gap:24px;
+  align-items:end;
+  padding:26px 0 16px
+}
+
+.eyebrow{
+  font-size:12px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  font-weight:900;
+  color:var(--teal)
+}
+
+h1{
+  margin:8px 0 12px;
+  font-size:clamp(38px,7vw,74px);
+  line-height:.98;
+  letter-spacing:-.045em;
+  color:var(--navy)
+}
+
+.lede{
+  font-size:19px;
+  line-height:1.55;
+  color:#43596a;
+  margin:0
+}
+
+.notehero{
+  background:var(--cream);
+  border:1px solid #F2D2B5;
+  border-radius:22px;
+  padding:18px;
+  line-height:1.5
+}
+
+.notehero b{
+  color:var(--orange)
+}
+
+.panel{
+  background:white;
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:22px;
+  box-shadow:0 10px 30px rgba(13,43,69,.05);
+  margin:16px 0
+}
+
+.panel h2{
+  margin:0 0 6px;
+  color:var(--navy);
+  font-size:25px
+}
+
+.sub{
+  margin:0 0 16px;
+  color:var(--muted);
+  line-height:1.5
+}
+
+.timegrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px
+}
+
+.timebtn{
+  border:2px solid transparent;
+  border-radius:18px;
+  padding:18px;
+  background:#EEF8FA;
+  text-align:left;
+  cursor:pointer
+}
+
+.timebtn.active{
+  border-color:var(--teal);
+  background:#E5F8F7
+}
+
+.timebtn .n{
+  display:block;
+  font-size:30px;
+  font-weight:900;
+  color:var(--navy)
+}
+
+.pills{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:12px
+}
+
+.pill{
+  padding:6px 9px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  font-size:12px;
+  font-weight:800;
+  background:#F8FAFB
+}
+
+.pill.live{
+  background:#EAF7F1;
+  color:var(--green);
+  border-color:#BEE2CE
+}
+
+.pill.warn{
+  background:#FFF5E3;
+  color:#925900;
+  border-color:#EFD39F
+}
+
+.segment{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:12px 0 18px
+}
+
+.segment button{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:999px;
+  padding:8px 12px;
+  font-weight:800;
+  cursor:pointer
+}
+
+.segment button.active{
+  background:var(--navy);
+  color:white
+}
+
+.transportgrid,
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px
+}
+
+.transport,
+.card{
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:#fff;
+  overflow:hidden
+}
+
+.transport{
+  padding:16px
+}
+
+.transport .icon{
+  font-size:30px
+}
+
+.transport h3{
+  margin:6px 0
+}
+
+.transport p{
+  font-size:14px;
+  color:var(--muted);
+  line-height:1.45
+}
+
+.cardhero{
+  min-height:118px;
+  padding:16px;
+  background:linear-gradient(
+    135deg,
+    var(--teal),
+    var(--navy)
+  );
+  color:white;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end
+}
+
+.cardhero .kicker{
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  opacity:.82
+}
+
+.cardhero h3{
+  margin:3px 0 0;
+  font-size:22px
+}
+
+.cardbody{
+  padding:15px;
+  display:flex;
+  flex-direction:column;
+  gap:10px
+}
+
+.badge{
+  display:inline-flex;
+  width:max-content;
+  border-radius:999px;
+  padding:5px 8px;
+  font-size:11px;
+  font-weight:900
+}
+
+.green{
+  background:#E8F6EE;
+  color:var(--green)
+}
+
+.yellow{
+  background:#FFF3D6;
+  color:#8D6400
+}
+
+.red{
+  background:#FCE7E5;
+  color:var(--red)
+}
+
+.blue{
+  background:#EAF1F8;
+  color:var(--navy)
+}
+
+.meta{
+  display:grid;
+  gap:6px;
+  font-size:13px;
+  color:#536877
+}
+
+.actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:4px
+}
+
+.btn{
+  border:none;
+  border-radius:11px;
+  padding:10px 12px;
+  font-weight:900;
+  cursor:pointer;
+  background:var(--navy);
+  color:white;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center
+}
+
+.btn.orange{
+  background:var(--orange)
+}
+
+.btn.teal{
+  background:var(--teal)
+}
+
+.btn.ghost{
+  background:white;
+  color:var(--navy);
+  border:1px solid var(--line)
+}
+
+.sectionhead{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:14px;
+  flex-wrap:wrap
+}
+
+.eventnotice{
+  border:1px dashed #E0B77D;
+  background:#FFF8EC;
+  color:#7A5200;
+  border-radius:14px;
+  padding:12px;
+  font-size:13px;
+  line-height:1.45
+}
+
+.filters{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap
+}
+
+.filters button{
+  border:1px solid var(--line);
+  background:white;
+  border-radius:999px;
+  padding:7px 10px;
+  font-weight:800;
+  cursor:pointer
+}
+
+.filters button.active{
+  background:var(--teal);
+  color:white
+}
+
+.empty{
+  padding:18px;
+  border:1px dashed var(--line);
+  border-radius:14px;
+  color:var(--muted);
+  text-align:center;
+  background:#FBFDFE
+}
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(4,25,38,.55);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:50
+}
+
+.modal.open{
+  display:flex
+}
+
+.modalbox{
+  width:min(720px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:white;
+  border-radius:24px;
+  padding:22px;
+  box-shadow:0 35px 90px rgba(0,0,0,.25)
+}
+
+.modalhead{
+  display:flex;
+  justify-content:space-between;
+  gap:12px
+}
+
+.close{
+  border:0;
+  background:#EEF2F4;
+  border-radius:50%;
+  width:36px;
+  height:36px;
+  font-size:20px;
+  cursor:pointer
+}
+
+.checks,
+.steps{
+  display:grid;
+  gap:8px;
+  margin:12px 0
+}
+
+.check,
+.step{
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:11px;
+  background:#FBFDFE
+}
+
+.step{
+  border-left:4px solid var(--teal)
+}
+
+.small{
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.45
+}
+
+.footer{
+  font-size:12px;
+  color:var(--muted);
+  padding:24px 0
+}
+
+
+/* ==============================
+   TDX Rail UI
+============================== */
+
+.railbox{
+  margin-top:14px;
+  border:1px solid #BEE2CE;
+  background:#F4FBF7;
+  border-radius:16px;
+  padding:14px
+}
+
+.railhead{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:center;
+  flex-wrap:wrap
+}
+
+.railstatus{
+  font-size:12px;
+  font-weight:900;
+  color:var(--green)
+}
+
+.railstatus.err{
+  color:var(--red)
+}
+
+.railtrips{
+  display:grid;
+  gap:8px;
+  margin-top:10px
+}
+
+.railtrip{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  gap:12px;
+  align-items:center;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:12px;
+  padding:10px
+}
+
+.railtrip .trainno{
+  font-weight:900;
+  color:var(--navy)
+}
+
+.railtrip .route{
+  font-size:13px;
+  color:#536877
+}
+
+.railtrip .times{
+  font-weight:900;
+  color:var(--navy);
+  text-align:right
+}
+
+.railimport{
+  margin-top:10px;
+  font-size:12px;
+  color:var(--muted)
+}
+
+.railimport input{
+  max-width:100%
+}
+
+@media(max-width:850px){
+
+  .hero{
+    grid-template-columns:1fr
+  }
+
+  .timegrid,
+  .transportgrid,
+  .cards{
+    grid-template-columns:1fr
+  }
+
+  .railtrip{
+    grid-template-columns:1fr
+  }
+
+  .railtrip .times{
+    text-align:left
+  }
+}
 </style>
+
 </head>
+
+
 <body>
+
 <header class="top">
+
   <div class="topin">
-    <div class="brand"><span class="zh">港都選物</span><span class="go">GO</span></div>
-    <div class="nav">
-      <button onclick="jump('planner')">Plan by time</button>
-      <button onclick="jump('events')">What's on</button>
-      <button onclick="jump('transport')">Transport</button>
+
+    <div class="brand">
+      <span class="zh">港都選物</span>
+      <span class="go">GO</span>
     </div>
+
+    <div class="nav">
+      <button onclick="jump('planner')">
+        Plan by time
+      </button>
+
+      <button onclick="jump('events')">
+        What's on
+      </button>
+
+      <button onclick="jump('transport')">
+        Transport
+      </button>
+    </div>
+
   </div>
+
 </header>
 
+
 <main class="wrap">
+
+  <!-- HERO -->
+
   <section class="hero">
+
     <div>
-      <div class="eyebrow">Starting from Kaohsiung Main Station</div>
-      <h1>No planning.<br>Just go.</h1>
-      <p class="lede">Choose how much time you have. We filter destinations and events that can be completed by public transit + walking + YouBike, with a return-safety check.</p>
+
+      <div class="eyebrow">
+        Starting from Kaohsiung Main Station
+      </div>
+
+      <h1>
+        No planning.<br>
+        Just go.
+      </h1>
+
+      <p class="lede">
+        Choose how much time you have.
+        We filter destinations and events that can be completed
+        by public transit + walking + YouBike,
+        with a return-safety check.
+      </p>
+
     </div>
-    <div class="notehero"><b>Content rule:</b> We do not rebuild official tourism content. We help you decide what is feasible now, then link to official guides and navigation.</div>
+
+
+    <div class="notehero">
+
+      <b>Content rule:</b>
+
+      We do not rebuild official tourism content.
+      We help you decide what is feasible now,
+      then link to official guides and navigation.
+
+    </div>
+
   </section>
+
+
+  <!-- TIME PLANNER -->
 
   <section id="planner" class="panel">
-    <h2>How much time do you have?</h2>
-    <p class="sub">你還有多少時間？第一順位仍然是「時間」。</p>
+
+    <h2>
+      How much time do you have?
+    </h2>
+
+    <p class="sub">
+      你還有多少時間？第一順位仍然是「時間」。
+    </p>
+
+
     <div class="timegrid">
-      <button class="timebtn" data-hours="3"><span class="n">3 HOURS</span><small>Quick escape</small></button>
-      <button class="timebtn active" data-hours="5"><span class="n">5 HOURS</span><small>Half-day trip</small></button>
-      <button class="timebtn" data-hours="8"><span class="n">8 HOURS</span><small>Full-day adventure</small></button>
+
+      <button
+        class="timebtn"
+        data-hours="3"
+      >
+        <span class="n">
+          3 HOURS
+        </span>
+
+        <small>
+          Quick escape
+        </small>
+      </button>
+
+
+      <button
+        class="timebtn active"
+        data-hours="5"
+      >
+        <span class="n">
+          5 HOURS
+        </span>
+
+        <small>
+          Half-day trip
+        </small>
+      </button>
+
+
+      <button
+        class="timebtn"
+        data-hours="8"
+      >
+        <span class="n">
+          8 HOURS
+        </span>
+
+        <small>
+          Full-day adventure
+        </small>
+      </button>
+
     </div>
+
+
     <div class="pills">
-      <span class="pill live" id="clock">Current time: --:--</span>
-      <span class="pill">Origin: Kaohsiung Main Station</span>
-      <span class="pill">Allowed: Public Transit + Walk + YouBike</span>
-      <span class="pill warn">Prototype: TRA/TDX live data not connected yet</span>
+
+      <span
+        class="pill live"
+        id="clock"
+      >
+        Current time: --:--
+      </span>
+
+
+      <span class="pill">
+        Origin: Kaohsiung Main Station
+      </span>
+
+
+      <span class="pill">
+        Allowed: Public Transit + Walk + YouBike
+      </span>
+
+
+      <span
+        class="pill warn"
+        id="tdxPill"
+      >
+        TDX Rail: connecting…
+      </span>
+
     </div>
+
   </section>
 
-  <section id="transport" class="panel">
-    <h2>Getting Around</h2>
-    <p class="sub">只保留可用於「無腦旅行」的移動方式。</p>
-    <div class="transportgrid">
-      <article class="transport"><div class="icon">🚆</div><h3>TRA｜臺鐵</h3><p>Cross-city trips to Tainan, Pingtung and Chiayi.</p><a class="btn ghost" target="_blank" rel="noopener" href="https://tip.railway.gov.tw/tra-tip-web/tip/tip001/tip112/gobytime?lang=EN_US">Official timetable ↗</a></article>
-      <article class="transport"><div class="icon">🚇</div><h3>MRT / LRT / Bus</h3><p>Urban Kaohsiung and connections to suburban routes.</p><a class="btn ghost" target="_blank" rel="noopener" href="https://khh.travel/en/traffic/local-transport/">Official transport guide ↗</a></article>
-      <article class="transport"><div class="icon">🚲</div><h3>YouBike 2.0</h3><p>Last-mile option only; not required for every route.</p><a class="btn ghost" target="_blank" rel="noopener" href="https://www.youbike.com.tw/region/kcg/">YouBike Kaohsiung ↗</a></article>
-    </div>
-  </section>
 
-  <section id="events" class="panel">
+  <!-- TDX RAIL -->
+
+  <section
+    id="railLive"
+    class="panel"
+  >
+
     <div class="sectionhead">
-      <div><h2>What's On Now?</h2><p class="sub">本週活動／本月活動，只保留大眾運輸＋步行＋YouBike 可達者。</p></div>
-      <div class="segment">
-        <button class="eventtab active" data-range="week">THIS WEEK</button>
-        <button class="eventtab" data-range="month">THIS MONTH</button>
+
+      <div>
+
+        <h2>
+          TRA Live｜Kaohsiung → Tainan
+        </h2>
+
+        <p class="sub">
+          TDX 當日時刻表 POC：
+          找出目前時間之後，
+          確實由高雄 4400 開往臺南 4220 的班次。
+        </p>
+
       </div>
+
+
+      <button
+        class="btn teal"
+        onclick="renderRailPreview()"
+      >
+        Refresh trains
+      </button>
+
     </div>
+
+
+    <div class="railbox">
+
+      <div class="railhead">
+
+        <b>
+          Next trains
+        </b>
+
+        <span
+          id="railStatus"
+          class="railstatus"
+        >
+          Connecting to TDX…
+        </span>
+
+      </div>
+
+
+      <div
+        id="railTrips"
+        class="railtrips"
+      >
+
+        <div class="empty">
+          Loading TDX rail data…
+        </div>
+
+      </div>
+
+
+      <div class="railimport">
+
+        Browser direct access may be restricted.
+
+        Backup:
+
+        <input
+          type="file"
+          id="tdxJsonFile"
+          accept=".json,application/json"
+        >
+
+        <span>
+          Import the DailyTrainTimetable JSON
+          downloaded from TDX Swagger.
+        </span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- TRANSPORT -->
+
+  <section
+    id="transport"
+    class="panel"
+  >
+
+    <h2>
+      Getting Around
+    </h2>
+
+    <p class="sub">
+      只保留可用於「無腦旅行」的移動方式。
+    </p>
+
+
+    <div class="transportgrid">
+
+      <article class="transport">
+
+        <div class="icon">
+          🚆
+        </div>
+
+        <h3>
+          TRA｜臺鐵
+        </h3>
+
+        <p>
+          Tainan route now supports TDX timetable data.
+          Pingtung and Chiayi remain planning estimates
+          in this POC.
+        </p>
+
+        <a
+          class="btn ghost"
+          target="_blank"
+          rel="noopener"
+          href="https://tip.railway.gov.tw/tra-tip-web/tip/tip001/tip112/gobytime?lang=EN_US"
+        >
+          Official timetable ↗
+        </a>
+
+      </article>
+
+
+      <article class="transport">
+
+        <div class="icon">
+          🚇
+        </div>
+
+        <h3>
+          MRT / LRT / Bus
+        </h3>
+
+        <p>
+          Urban Kaohsiung and connections
+          to suburban routes.
+        </p>
+
+        <a
+          class="btn ghost"
+          target="_blank"
+          rel="noopener"
+          href="https://khh.travel/en/traffic/local-transport/"
+        >
+          Official transport guide ↗
+        </a>
+
+      </article>
+
+
+      <article class="transport">
+
+        <div class="icon">
+          🚲
+        </div>
+
+        <h3>
+          YouBike 2.0
+        </h3>
+
+        <p>
+          Last-mile option only;
+          not required for every route.
+        </p>
+
+        <a
+          class="btn ghost"
+          target="_blank"
+          rel="noopener"
+          href="https://www.youbike.com.tw/region/kcg/"
+        >
+          YouBike Kaohsiung ↗
+        </a>
+
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <!-- EVENTS -->
+
+  <section
+    id="events"
+    class="panel"
+  >
+
+    <div class="sectionhead">
+
+      <div>
+
+        <h2>
+          What's On Now?
+        </h2>
+
+        <p class="sub">
+          本週活動／本月活動，
+          只保留大眾運輸＋步行＋YouBike 可達者。
+        </p>
+
+      </div>
+
+
+      <div class="segment">
+
+        <button
+          class="eventtab active"
+          data-range="week"
+        >
+          THIS WEEK
+        </button>
+
+        <button
+          class="eventtab"
+          data-range="month"
+        >
+          THIS MONTH
+        </button>
+
+      </div>
+
+    </div>
+
+
     <div class="eventnotice">
-      V2 prototype 已完成活動 UI、時間範圍與交通篩選邏輯；真正「即時活動」需要接官方活動資料源或後端代理 API。
+
+      V3 prototype 已完成活動 UI、
+      時間範圍與交通篩選邏輯；
+
+      真正「即時活動」仍需要接
+      官方活動資料源或後端代理 API。
+
       未接資料前，不會假裝顯示即時活動。
+
     </div>
-    <div class="filters" style="margin:14px 0">
-      <button class="eventfilter active" data-mode="all">All accessible</button>
-      <button class="eventfilter" data-mode="night">Evening</button>
-      <button class="eventfilter" data-mode="indoor">Indoor</button>
+
+
+    <div
+      class="filters"
+      style="margin:14px 0"
+    >
+
+      <button
+        class="eventfilter active"
+        data-mode="all"
+      >
+        All accessible
+      </button>
+
+      <button
+        class="eventfilter"
+        data-mode="night"
+      >
+        Evening
+      </button>
+
+      <button
+        class="eventfilter"
+        data-mode="indoor"
+      >
+        Indoor
+      </button>
+
     </div>
-    <div id="eventCards" class="cards"></div>
+
+
+    <div
+      id="eventCards"
+      class="cards"
+    ></div>
+
   </section>
 
+
+  <!-- TRIP RECOMMENDATIONS -->
+
   <section class="panel">
-    <h2 id="tripTitle">You have 5 hours.</h2>
-    <p class="sub">系統只顯示符合「大眾運輸＋步行＋YouBike」條件的目的地。</p>
+
+    <h2 id="tripTitle">
+      You have 5 hours.
+    </h2>
+
+    <p class="sub">
+      系統只顯示符合
+      「大眾運輸＋步行＋YouBike」
+      條件的目的地。
+    </p>
+
+
     <div class="segment">
-      <button class="tripfilter active" data-filter="all">All</button>
-      <button class="tripfilter" data-filter="train">By Train</button>
-      <button class="tripfilter" data-filter="kaohsiung">Local Kaohsiung</button>
-      <button class="tripfilter" data-filter="night">Night-friendly</button>
+
+      <button
+        class="tripfilter active"
+        data-filter="all"
+      >
+        All
+      </button>
+
+      <button
+        class="tripfilter"
+        data-filter="train"
+      >
+        By Train
+      </button>
+
+      <button
+        class="tripfilter"
+        data-filter="kaohsiung"
+      >
+        Local Kaohsiung
+      </button>
+
+      <button
+        class="tripfilter"
+        data-filter="night"
+      >
+        Night-friendly
+      </button>
+
     </div>
-    <div id="tripCards" class="cards"></div>
+
+
+    <div
+      id="tripCards"
+      class="cards"
+    ></div>
+
   </section>
+
+
+  <!-- PRODUCT -->
 
   <section class="panel">
-    <h2>Product × Destination</h2>
-    <p class="sub">商品可以是另一個入口，但仍會先進入「Can I go now?」判斷。</p>
-    <div class="eventnotice">🍌 Qishan banana snack → Qishan hometown story → Can I go now? → official guide / navigation</div>
+
+    <h2>
+      Product × Destination
+    </h2>
+
+    <p class="sub">
+      商品可以是另一個入口，
+      但仍會先進入
+      「Can I go now?」判斷。
+    </p>
+
+    <div class="eventnotice">
+      🍌 Qishan banana snack
+      → Qishan hometown story
+      → Can I go now?
+      → official guide / navigation
+    </div>
+
   </section>
 
-  <div class="footer">PORT CITY PICKS GO — Prototype V2. Live event and transport adapters are intentionally not faked.</div>
+
+  <div class="footer">
+    PORT CITY PICKS GO —
+    Prototype V3 · TDX Rail POC.
+    Live events remain unconnected;
+    Tainan rail can use TDX or imported TDX JSON.
+  </div>
+
 </main>
 
-<div id="modal" class="modal">
+
+<!-- MODAL -->
+
+<div
+  id="modal"
+  class="modal"
+>
+
   <div class="modalbox">
+
     <div class="modalhead">
-      <div><div class="eyebrow" id="mCity"></div><h2 id="mTitle" style="margin:4px 0 0;color:var(--navy)"></h2></div>
-      <button class="close" onclick="closeModal()">×</button>
+
+      <div>
+
+        <div
+          class="eyebrow"
+          id="mCity"
+        ></div>
+
+        <h2
+          id="mTitle"
+          style="margin:4px 0 0;color:var(--navy)"
+        ></h2>
+
+      </div>
+
+
+      <button
+        class="close"
+        onclick="closeModal()"
+      >
+        ×
+      </button>
+
     </div>
-    <div id="mStatus" style="margin:12px 0"></div>
-    <h3>Before You Go</h3>
-    <div id="mChecks" class="checks"></div>
-    <h3>Trip flow</h3>
-    <div id="mSteps" class="steps"></div>
-    <div id="mActions" class="actions"></div>
-    <p class="small">Prototype note: travel times are planning estimates until TRA/TDX live data is connected.</p>
+
+
+    <div
+      id="mStatus"
+      style="margin:12px 0"
+    ></div>
+
+
+    <h3>
+      Before You Go
+    </h3>
+
+
+    <div
+      id="mChecks"
+      class="checks"
+    ></div>
+
+
+    <h3>
+      Trip flow
+    </h3>
+
+
+    <div
+      id="mSteps"
+      class="steps"
+    ></div>
+
+
+    <div
+      id="mActions"
+      class="actions"
+    ></div>
+
+
+    <p
+      class="small"
+      id="modalDataNote"
+    >
+      Prototype note:
+      non-TDX travel times remain planning estimates.
+    </p>
+
   </div>
+
 </div>
 
+
 <script>
+
+/* ============================================
+   OFFICIAL LINKS
+============================================ */
+
 const official = {
-  kaohsiung:"https://khh.travel/en/travel/tourlist/",
-  kaohsiungEvents:"https://khh.travel/en/event/calendar/",
-  tainan:"https://www.twtainan.net/en/tours/tourslist",
-  pingtung:"https://www.i-pingtung.com/en",
-  chiayiRail:"https://afrch.forest.gov.tw/EN",
-  chimei:"https://www.chimeimuseum.org/",
-  fgs:"https://www.fgsbmc.org.tw/en/index.aspx"
+
+  kaohsiung:
+    "https://khh.travel/en/travel/tourlist/",
+
+  kaohsiungEvents:
+    "https://khh.travel/en/event/calendar/",
+
+  tainan:
+    "https://www.twtainan.net/en/tours/tourslist",
+
+  pingtung:
+    "https://www.i-pingtung.com/en",
+
+  chiayiRail:
+    "https://afrch.forest.gov.tw/EN",
+
+  chimei:
+    "https://www.chimeimuseum.org/",
+
+  fgs:
+    "https://www.fgsbmc.org.tw/en/index.aspx"
+
 };
 
+
+/* ============================================
+   DESTINATIONS
+============================================ */
+
 const trips = [
-  {id:"harbor",title:"Kaohsiung Harbor",city:"Kaohsiung",category:"kaohsiung",minHours:3,cutoff:21,night:true,transport:"MRT + LRT + Walk",english:"High",returnRisk:"Lowest",official:official.kaohsiung,map:"https://www.google.com/maps/dir/?api=1&destination=22.6199,120.2815&travelmode=transit",checks:["Public transit only","Official English guide","Good late-day option"],steps:["Kaohsiung Main Station","MRT/LRT to harbor area","Explore Pier-2 / Hamasen","Return by MRT/LRT"]},
-  {id:"liouhe",title:"Liuhe Night Market",city:"Kaohsiung",category:"kaohsiung",minHours:2,cutoff:23,night:true,transport:"MRT + Walk",english:"Medium–High",returnRisk:"Lowest",official:"https://khh.travel/en/board-and-lodging/night-market/",map:"https://www.google.com/maps/dir/?api=1&destination=22.6322,120.3017&travelmode=transit",checks:["Best in the evening","Cash is useful","Food-stall English varies","Easy return to Kaohsiung Main Station"],steps:["Kaohsiung Main Station","MRT / walk to Formosa Boulevard area","Explore Liuhe Night Market","Return by MRT / walk"]},
-  {id:"tainan",title:"Tainan Old Town",city:"Tainan",category:"train",minHours:5,cutoff:18,night:true,transport:"TRA + Walk / YouBike",english:"High",returnRisk:"Low",official:official.tainan,map:"https://www.google.com/maps/dir/?api=1&destination=22.9975,120.2025&travelmode=transit",checks:["Check TRA timetable","Opening hours vary","Some local shops Chinese-only"],steps:["Kaohsiung → Tainan by TRA","Walk / YouBike to old town","Use official Tainan guide","Return with buffer"]},
-  {id:"chimei",title:"Chimei Museum",city:"Tainan",category:"train",minHours:4,cutoff:15.5,night:false,transport:"TRA + Walk",english:"Very High",returnRisk:"Low",official:official.chimei,map:"https://www.google.com/maps/dir/?api=1&destination=22.9345,120.2260&travelmode=transit",checks:["Check opening day","Check last admission","Indoor-friendly"],steps:["Kaohsiung → Bao'an by TRA","Walk to Chimei Museum","Visit museum","Return to Bao'an Station"]},
-  {id:"pingtung",title:"Victory Star Village",city:"Pingtung",category:"train",minHours:4,cutoff:18,night:false,transport:"TRA + Walk / YouBike",english:"Medium–High",returnRisk:"Low",official:official.pingtung,map:"https://www.google.com/maps/dir/?api=1&destination=22.6775,120.4862&travelmode=transit",checks:["Check shop hours","Some menus Chinese-only","Walkable / bikeable"],steps:["Kaohsiung → Pingtung","Walk / YouBike","Explore village","Return to station"]},
-  {id:"chiayi",title:"Railway & Timber City",city:"Chiayi",category:"train",minHours:8,cutoff:11.5,night:false,transport:"TRA + Walk / YouBike",english:"High",returnRisk:"Medium",official:official.chiayiRail,map:"https://www.google.com/maps/dir/?api=1&destination=23.4870,120.4552&travelmode=transit",checks:["Best as full day","Check express train","Return buffer strongly recommended"],steps:["Kaohsiung → Chiayi","Walk / YouBike","Forestry district","Return early"]},
-  {id:"qishan",title:"Qishan Banana Town",city:"Kaohsiung",category:"kaohsiung",minHours:6,cutoff:14,night:false,transport:"MRT + Bus + Walk",english:"Medium",returnRisk:"Medium",official:official.kaohsiung,map:"https://www.google.com/maps/dir/?api=1&destination=22.8883,120.4830&travelmode=transit",checks:["Bus-based","Check return bus","Local shops limited English"],steps:["Kaohsiung → Zuoying","Bus to Qishan","Old street / railway story","Return bus"]},
-  {id:"meinong",title:"Meinong Hakka Culture",city:"Kaohsiung",category:"kaohsiung",minHours:8,cutoff:11.5,night:false,transport:"MRT + Bus + Walk",english:"Medium",returnRisk:"Medium",official:official.kaohsiung,map:"https://www.google.com/maps/dir/?api=1&destination=22.9001,120.5420&travelmode=transit",checks:["Best as full day","Last mile takes planning","Culture-focused"],steps:["Kaohsiung → Zuoying","Bus to Meinong","Hakka culture / food","Return with buffer"]},
-  {id:"fgs",title:"Fo Guang Shan × Dashu",city:"Kaohsiung",category:"kaohsiung",minHours:6,cutoff:14,night:false,transport:"MRT + Bus + Walk",english:"High",returnRisk:"Medium",official:official.fgs,map:"https://www.google.com/maps/dir/?api=1&destination=22.7557,120.4450&travelmode=transit",checks:["Check museum hours","Bus frequency matters","English service available"],steps:["Kaohsiung → Zuoying","Bus to Fo Guang Shan","Visit museum","Return by bus + MRT"]}
+
+  {
+    id:"harbor",
+    title:"Kaohsiung Harbor",
+    city:"Kaohsiung",
+    category:"kaohsiung",
+    minHours:3,
+    cutoff:21,
+    night:true,
+    transport:"MRT + LRT + Walk",
+    english:"High",
+    returnRisk:"Lowest",
+    official:official.kaohsiung,
+    map:
+      "https://www.google.com/maps/dir/?api=1&destination=22.6199,120.2815&travelmode=transit",
+    checks:[
+      "Public transit only",
+      "Official English guide",
+      "Good late-day option"
+    ],
+    steps:[
+      "Kaohsiung Main Station",
+      "MRT/LRT to harbor area",
+      "Explore Pier-2 / Hamasen",
+      "Return by MRT/LRT"
+    ]
+  },
+
+
+  {
+    id:"liouhe",
+    title:"Liuhe Night Market",
+    city:"Kaohsiung",
+    category:"kaohsiung",
+    minHours:2,
+    cutoff:23,
+    night:true,
+    transport:"MRT + Walk",
+    english:"Medium–High",
+    returnRisk:"Lowest",
+    official:
+      "https://khh.travel/en/board-and-lodging/night-market/",
+    map:
+      "https://www.google.com/maps/dir/?api=1&destination=22.6322,120.3017&travelmode=transit",
+    checks:[
+      "Best in the evening",
+      "Cash is useful",
+      "Food-stall English varies",
+      "Easy return to Kaohsiung Main Station"
+    ],
+    steps:[
+      "Kaohsiung Main Station",
+      "MRT / walk to Formosa Boulevard area",
+      "Explore Liuhe Night Market",
+      "Return by MRT / walk"
+    ]
+  },
+
+
+  {
+    id:"tainan",
+    title:"Tainan Old Town",
+    city:"Tainan",
+    category:"train",
+    minHours:5,
+    cutoff:18,
+    night:true,
+    transport:"TRA + Walk / YouBike",
+    english:"High",
+    returnRisk:"Low",
+    official:official.tainan,
+    map:
+      "https://www.google.com/maps/dir/?api=1&destination=22.9975,120.2025&travelmode=transit",
+    checks:[
+      "TDX rail timetable available in V3",
+      "Opening hours vary",
+      "Some local shops Chinese-only"
+    ],
+    steps:[
+      "Kaohsiung → Tainan by TRA",
+      "Walk / YouBike to old town",
+      "Use official Tainan guide",
+      "Return with buffer"
+    ]
+  },
+
+
+  {
+    id:"chimei",
+    title:"Chimei Museum",
+    city:"Tainan",
+    category:"train",
+    minHours:4,
+    cutoff:15.5,
+    night:false,
+    transport:"TRA + Walk",
+    english:"Very High",
+    returnRisk:"Low",
+    official:official.chimei,
+    map:
+      "https://www.google.com/maps/dir/?api=1&destination=22.9345,120.2260&travelmode=transit",
+    checks:[
+      "Check opening day",
+      "Check last admission",
+      "Indoor-friendly"
+    ],
+    steps:[
+      "Kaohsiung → Bao'an by TRA",
+      "Walk to Chimei Museum",
+      "Visit museum",
+      "Return to Bao'an Station"
+    ]
+  },
+
+
+  {
+    id:"pingtung",
+    title:"Victory Star Village",
+    city:"Pingtung",
+    category:"train",
+    minHours:4,
+    cutoff:18,
+    night:false,
+    transport:"TRA + Walk / YouBike",
+    english:"Medium–High",
+    returnRisk:"Low",
+    official:official.pingtung,
+    map:
+      "https://www.google.com/maps/dir/?api=1&destination=22.6775,120.4862&travelmode=transit",
+    checks:[
+      "Check shop hours",
+      "Some menus Chinese-only",
+      "Walkable / bikeable"
+    ],
+    steps:[
+      "Kaohsiung → Pingtung",
+      "Walk / YouBike",
+      "Explore village",
+      "Return to station"
+    ]
+  },
+
+
+  {
+    id:"chiayi",
+    title:"Railway & Timber City",
+    city:"Chiayi",
+    category:"train",
+    minHours:8,
+    cutoff:11.5,
+    night:false,
+    transport:"TRA + Walk / YouBike",
+    english:"High",
+    returnRisk:"Medium",
+    official:official.chiayiRail,
+    map:
+      "https://www.google.com/maps/dir/?api=1&destination=23.4870,120.4552&travelmode=transit",
+    checks:[
+      "Best as full day",
+      "Check express train",
+      "Return buffer strongly recommended"
+    ],
+    steps:[
+      "Kaohsiung → Chiayi",
+      "Walk / YouBike",
+      "Forestry district",
+      "Return early"
+    ]
+  },
+
+
+  {
+    id:"qishan",
+    title:"Qishan Banana Town",
+    city:"Kaohsiung",
+    category:"kaohsiung",
+    minHours:6,
+    cutoff:14,
+    night:false,
+    transport:"MRT + Bus + Walk",
+    english:"Medium",
+    returnRisk:"Medium",
+    official:official.kaohsiung,
+    map:
+      "https://www.google.com/maps/dir/?api=1&destination=22.8883,120.4830&travelmode=transit",
+    checks:[
+      "Bus-based",
+      "Check return bus",
+      "Local shops limited English"
+    ],
+    steps:[
+      "Kaohsiung → Zuoying",
+      "Bus to Qishan",
+      "Old street / railway story",
+      "Return bus"
+    ]
+  },
+
+
+  {
+    id:"meinong",
+    title:"Meinong Hakka Culture",
+    city:"Kaohsiung",
+    category:"kaohsiung",
+    minHours:8,
+    cutoff:11.5,
+    night:false,
+    transport:"MRT + Bus + Walk",
+    english:"Medium",
+    returnRisk:"Medium",
+    official:official.kaohsiung,
+    map:
+      "https://www.google.com/maps/dir/?api=1&destination=22.9001,120.5420&travelmode=transit",
+    checks:[
+      "Best as full day",
+      "Last mile takes planning",
+      "Culture-focused"
+    ],
+    steps:[
+      "Kaohsiung → Zuoying",
+      "Bus to Meinong",
+      "Hakka culture / food",
+      "Return with buffer"
+    ]
+  },
+
+
+  {
+    id:"fgs",
+    title:"Fo Guang Shan × Dashu",
+    city:"Kaohsiung",
+    category:"kaohsiung",
+    minHours:6,
+    cutoff:14,
+    night:false,
+    transport:"MRT + Bus + Walk",
+    english:"High",
+    returnRisk:"Medium",
+    official:official.fgs,
+    map:
+      "https://www.google.com/maps/dir/?api=1&destination=22.7557,120.4450&travelmode=transit",
+    checks:[
+      "Check museum hours",
+      "Bus frequency matters",
+      "English service available"
+    ],
+    steps:[
+      "Kaohsiung → Zuoying",
+      "Bus to Fo Guang Shan",
+      "Visit museum",
+      "Return by bus + MRT"
+    ]
+  }
+
 ];
 
-/* EVENT ADAPTER
-   Replace mockEvents with data from your backend, e.g.
-   GET /api/events?range=week
-   Required fields:
-   id,title,city,start,end,venue,category,isEvening,isIndoor,
-   transportModes,walkable,youbikeOptional,officialUrl,mapUrl
-*/
-const mockEvents = []; // intentionally empty: do not fake live events
 
-let selectedHours = 5;
-let tripFilter = "all";
-let eventRange = "week";
-let eventFilter = "all";
+/* ============================================
+   TDX RAIL ADAPTER
+   Prototype V3
 
-function nowHour(){
-  const d=new Date(); return d.getHours()+d.getMinutes()/60;
-}
-function tripStatus(t){
-  const h=nowHour();
-  if(selectedHours<t.minHours) return ["NOT NOW","red","Not enough time"];
-  if(h>t.cutoff) return ["CHECK FIRST","yellow","Late departure window"];
-  if(t.returnRisk==="Lowest") return ["EASY TRIP","green","Low return risk"];
-  return ["GO NOW","green","Fits selected time"];
-}
-function tripScore(t){
-  let s=100-Math.abs(selectedHours-t.minHours)*4;
-  if(selectedHours<t.minHours) s-=100;
-  if(nowHour()>t.cutoff) s-=55;
-  if(t.returnRisk==="Lowest") s+=12;
-  if(t.english==="High"||t.english==="Very High") s+=6;
-  if(t.night && nowHour()>=17) s+=10;
-  return s;
-}
-function renderTrips(){
-  document.getElementById("tripTitle").textContent=`You have ${selectedHours} hours.`;
-  let list=trips.filter(t=>{
-    if(tripFilter==="all") return true;
-    if(tripFilter==="night") return t.night;
-    return t.category===tripFilter;
-  }).sort((a,b)=>tripScore(b)-tripScore(a)).slice(0,9);
-  const box=document.getElementById("tripCards"); box.innerHTML="";
-  list.forEach(t=>{
-    const [label,color,why]=tripStatus(t);
-    const card=document.createElement("article"); card.className="card";
-    card.innerHTML=`<div class="cardhero"><div class="kicker">${t.city}</div><h3>${t.title}</h3></div>
-      <div class="cardbody">
-        <span class="badge ${color}">${label}</span>
-        <div class="meta">
-          <div>🚌 ${t.transport}</div>
-          <div>⏱ Minimum recommended time: ${t.minHours} h</div>
-          <div>🌐 English: ${t.english}</div>
-          <div>↩ Return risk: ${t.returnRisk}</div>
-          <div>💡 ${why}</div>
-        </div>
-        <div class="actions">
-          <button class="btn orange" onclick="openTrip('${t.id}')">Can I go now?</button>
-          <a class="btn ghost" href="${t.official}" target="_blank" rel="noopener">Official guide ↗</a>
-        </div>
-      </div>`;
-    box.appendChild(card);
-  });
+   高雄 StationID = 4400
+   臺南 StationID = 4220
+
+   必須：
+   高雄 StopSequence < 臺南 StopSequence
+============================================ */
+
+const TDX_RAIL_URL =
+  "https://tdx.transportdata.tw/api/basic/v3/Rail/TRA/DailyTrainTimetable/Today?$format=JSON";
+
+
+const RAIL_ORIGIN =
+  "4400";
+
+
+const RAIL_DESTINATION =
+  "4220";
+
+
+let tdxRailData =
+  null;
+
+
+let tdxRailSource =
+  "not loaded";
+
+
+/* --------------------------------------------
+   HH:MM → minutes
+-------------------------------------------- */
+
+function hmToMin(hm){
+
+  if(!hm){
+    return null;
+  }
+
+  const [h,m] =
+    hm.split(":").map(Number);
+
+  return h * 60 + m;
+
 }
 
-function inRange(ev,range){
-  const now=new Date(), end=new Date(ev.end), start=new Date(ev.start);
-  if(end<now) return false;
-  if(range==="week"){ const x=new Date(now); x.setDate(now.getDate()+7); return start<=x && end>=now; }
-  const monthEnd=new Date(now.getFullYear(),now.getMonth()+1,0,23,59,59);
-  return start<=monthEnd && end>=now;
+
+/* --------------------------------------------
+   duration display
+-------------------------------------------- */
+
+function durationText(mins){
+
+  if(mins < 60){
+    return `${mins} min`;
+  }
+
+  const h =
+    Math.floor(mins / 60);
+
+  const m =
+    mins % 60;
+
+  return m
+    ? `${h} h ${m} min`
+    : `${h} h`;
+
 }
-function eventAccessible(ev){
-  const allowed=(ev.transportModes||[]).every(x=>["TRA","MRT","LRT","BUS","WALK","YOUBIKE"].includes(x));
-  return allowed && ev.walkable===true;
+
+
+/* --------------------------------------------
+   HTML escape
+-------------------------------------------- */
+
+function safeText(v){
+
+  return String(v ?? "")
+    .replace(
+      /[&<>"']/g,
+      c => ({
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#039;"
+      }[c])
+    );
+
 }
-function renderEvents(){
-  const box=document.getElementById("eventCards"); box.innerHTML="";
-  let list=mockEvents.filter(ev=>inRange(ev,eventRange)&&eventAccessible(ev));
-  if(eventFilter==="night") list=list.filter(ev=>ev.isEvening);
-  if(eventFilter==="indoor") list=list.filter(ev=>ev.isIndoor);
-  if(!list.length){
-    box.innerHTML=`<div class="empty" style="grid-column:1/-1">
-      Live event feed is not connected yet.<br>
-      <a class="btn ghost" style="margin-top:10px" target="_blank" rel="noopener" href="${official.kaohsiungEvents}">Open official Kaohsiung event calendar ↗</a>
-    </div>`;
+
+
+/* --------------------------------------------
+   Build Kaohsiung → Tainan trips
+-------------------------------------------- */
+
+function railTripsFrom(
+  data,
+  originID = RAIL_ORIGIN,
+  destinationID = RAIL_DESTINATION
+){
+
+  if(
+    !data ||
+    !Array.isArray(data.TrainTimetables)
+  ){
+    return [];
+  }
+
+
+  const out = [];
+
+
+  for(
+    const train
+    of data.TrainTimetables
+  ){
+
+    const info =
+      train.TrainInfo || {};
+
+
+    const stops =
+      train.StopTimes || [];
+
+
+    const origin =
+      stops.find(
+        stop =>
+          stop.StationID === originID
+      );
+
+
+    const destination =
+      stops.find(
+        stop =>
+          stop.StationID === destinationID
+      );
+
+
+    /*
+      必須同時停高雄、臺南
+    */
+
+    if(
+      !origin ||
+      !destination
+    ){
+      continue;
+    }
+
+
+    /*
+      高雄必須先於臺南
+
+      避免把：
+      臺南 → 高雄
+
+      誤認成：
+      高雄 → 臺南
+    */
+
+    if(
+      Number(origin.StopSequence) >=
+      Number(destination.StopSequence)
+    ){
+      continue;
+    }
+
+
+    /*
+      排除停駛
+    */
+
+    if(
+      Number(info.SuspendedFlag) !== 0 ||
+      Number(origin.SuspendedFlag) !== 0 ||
+      Number(destination.SuspendedFlag) !== 0
+    ){
+      continue;
+    }
+
+
+    let duration =
+      hmToMin(destination.ArrivalTime) -
+      hmToMin(origin.DepartureTime);
+
+
+    /*
+      預防跨午夜
+    */
+
+    if(duration < 0){
+      duration += 1440;
+    }
+
+
+    out.push({
+
+      trainNo:
+        info.TrainNo || "",
+
+      type:
+        info.TrainTypeName?.Zh_tw ||
+        "臺鐵",
+
+      headSign:
+        info.TripHeadSign || "",
+
+      departure:
+        origin.DepartureTime,
+
+      arrival:
+        destination.ArrivalTime,
+
+      duration,
+
+      note:
+        info.Note || ""
+
+    });
+
+  }
+
+
+  return out.sort(
+    (a,b) =>
+      hmToMin(a.departure) -
+      hmToMin(b.departure)
+  );
+
+}
+
+
+/* --------------------------------------------
+   Get upcoming trains
+-------------------------------------------- */
+
+function upcomingRail(
+  count = 3
+){
+
+  const all =
+    railTripsFrom(
+      tdxRailData
+    );
+
+
+  const now =
+    new Date();
+
+
+  const nowMin =
+    now.getHours() * 60 +
+    now.getMinutes();
+
+
+  return all
+    .filter(
+      train =>
+        hmToMin(train.departure) >=
+        nowMin
+    )
+    .slice(
+      0,
+      count
+    );
+
+}
+
+
+/* --------------------------------------------
+   Simplify train type
+-------------------------------------------- */
+
+function cleanRailType(type){
+
+  if(
+    type.includes("3000")
+  ){
+    return "EMU3000 自強";
+  }
+
+
+  if(
+    type.includes("普悠瑪")
+  ){
+    return "普悠瑪";
+  }
+
+
+  if(
+    type.includes("自強")
+  ){
+    return "自強";
+  }
+
+
+  if(
+    type.includes("區間快")
+  ){
+    return "區間快";
+  }
+
+
+  if(
+    type.includes("區間")
+  ){
+    return "區間";
+  }
+
+
+  if(
+    type.includes("莒光")
+  ){
+    return "莒光";
+  }
+
+
+  return type;
+
+}
+
+
+/* --------------------------------------------
+   Rail connection status
+-------------------------------------------- */
+
+function setRailStatus(
+  message,
+  error = false
+){
+
+  const status =
+    document.getElementById(
+      "railStatus"
+    );
+
+
+  if(status){
+
+    status.textContent =
+      message;
+
+    status.classList.toggle(
+      "err",
+      error
+    );
+
+  }
+
+
+  const pill =
+    document.getElementById(
+      "tdxPill"
+    );
+
+
+  if(pill){
+
+    pill.textContent =
+      error
+        ? "TDX Rail: import JSON backup"
+        : message;
+
+
+    pill.classList.toggle(
+      "warn",
+      error
+    );
+
+
+    pill.classList.toggle(
+      "live",
+      !error
+    );
+
+  }
+
+}
+
+
+/* --------------------------------------------
+   Rail preview on main page
+-------------------------------------------- */
+
+function renderRailPreview(){
+
+  const box =
+    document.getElementById(
+      "railTrips"
+    );
+
+
+  if(!box){
     return;
   }
-  list.forEach(ev=>{
-    const card=document.createElement("article"); card.className="card";
-    card.innerHTML=`<div class="cardhero"><div class="kicker">${ev.city}</div><h3>${ev.title}</h3></div>
-      <div class="cardbody">
-        <span class="badge blue">${eventRange==="week"?"THIS WEEK":"THIS MONTH"}</span>
-        <div class="meta">
-          <div>📅 ${ev.start} → ${ev.end}</div>
-          <div>📍 ${ev.venue}</div>
-          <div>🚆 ${(ev.transportModes||[]).join(" + ")}</div>
+
+
+  if(!tdxRailData){
+
+    box.innerHTML = `
+      <div class="empty">
+        TDX data is not loaded.
+        Import the Swagger JSON below
+        if direct browser access fails.
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  const list =
+    upcomingRail(3);
+
+
+  if(!list.length){
+
+    box.innerHTML = `
+      <div class="empty">
+        No later Kaohsiung → Tainan
+        trains were found
+        in the loaded timetable.
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  box.innerHTML =
+    list.map(
+      (train,index) => `
+
+        <div class="railtrip">
+
+          <div>
+
+            <div class="trainno">
+
+              ${
+                index === 0
+                  ? "NEXT · "
+                  : ""
+              }
+
+              ${safeText(train.trainNo)}
+
+            </div>
+
+            <div class="small">
+              ${safeText(
+                cleanRailType(
+                  train.type
+                )
+              )}
+            </div>
+
+          </div>
+
+
+          <div class="route">
+
+            Kaohsiung
+            ${safeText(train.departure)}
+
+            →
+
+            Tainan
+            ${safeText(train.arrival)}
+
+            <br>
+
+            ${safeText(train.headSign)}
+
+          </div>
+
+
+          <div class="times">
+
+            ${durationText(
+              train.duration
+            )}
+
+          </div>
+
         </div>
-        <div class="actions">
-          <a class="btn orange" target="_blank" rel="noopener" href="${ev.mapUrl}">Navigate ↗</a>
-          <a class="btn ghost" target="_blank" rel="noopener" href="${ev.officialUrl}">Official event ↗</a>
-        </div>
-      </div>`;
-    box.appendChild(card);
-  });
+
+      `
+    ).join("");
+
 }
+
+
+/* --------------------------------------------
+   Rail HTML inside Tainan modal
+-------------------------------------------- */
+
+function railModalHTML(){
+
+  if(!tdxRailData){
+
+    return `
+
+      <div class="check">
+
+        ⚠ TDX timetable is not loaded yet.
+
+        Use the Rail section to import
+        the Swagger JSON if direct access failed.
+
+      </div>
+
+    `;
+
+  }
+
+
+  const list =
+    upcomingRail(3);
+
+
+  if(!list.length){
+
+    return `
+
+      <div class="check">
+
+        ⚠ No later Kaohsiung → Tainan
+        train was found
+        in the loaded timetable.
+
+      </div>
+
+    `;
+
+  }
+
+
+  return `
+
+    <div class="railbox">
+
+      <div class="railhead">
+
+        <b>
+          TDX timetable · next trains
+        </b>
+
+        <span class="railstatus">
+
+          ${
+            safeText(
+              tdxRailData.TrainDate ||
+              "Today"
+            )
+          }
+
+        </span>
+
+      </div>
+
+
+      <div class="railtrips">
+
+        ${
+          list.map(
+            (train,index) => `
+
+              <div class="railtrip">
+
+                <div>
+
+                  <div class="trainno">
+
+                    ${
+                      index === 0
+                        ? "NEXT · "
+                        : ""
+                    }
+
+                    ${
+                      safeText(
+                        train.trainNo
+                      )
+                    }
+
+                  </div>
+
+
+                  <div class="small">
+
+                    ${
+                      safeText(
+                        cleanRailType(
+                          train.type
+                        )
+                      )
+                    }
+
+                  </div>
+
+                </div>
+
+
+                <div class="route">
+
+                  Kaohsiung
+                  ${
+                    safeText(
+                      train.departure
+                    )
+                  }
+
+                  →
+
+                  Tainan
+                  ${
+                    safeText(
+                      train.arrival
+                    )
+                  }
+
+                </div>
+
+
+                <div class="times">
+
+                  ${
+                    durationText(
+                      train.duration
+                    )
+                  }
+
+                </div>
+
+              </div>
+
+            `
+          ).join("")
+        }
+
+      </div>
+
+    </div>
+
+  `;
+
+}
+
+
+/* --------------------------------------------
+   Load TDX directly
+-------------------------------------------- */
+
+async function loadTDXRail(){
+
+  setRailStatus(
+    "TDX Rail: connecting…"
+  );
+
+
+  try{
+
+    const response =
+      await fetch(
+        TDX_RAIL_URL,
+        {
+          headers:{
+            Accept:"application/json"
+          }
+        }
+      );
+
+
+    if(
+      !response.ok
+    ){
+
+      throw new Error(
+        `HTTP ${response.status}`
+      );
+
+    }
+
+
+    const data =
+      await response.json();
+
+
+    if(
+      !Array.isArray(
+        data.TrainTimetables
+      )
+    ){
+
+      throw new Error(
+        "TrainTimetables missing"
+      );
+
+    }
+
+
+    tdxRailData =
+      data;
+
+
+    tdxRailSource =
+      "TDX direct";
+
+
+    setRailStatus(
+      `TDX Rail: ${
+        data.TrainDate ||
+        "loaded"
+      }`
+    );
+
+
+    renderRailPreview();
+
+  }
+
+
+  catch(error){
+
+    console.error(
+      "TDX direct load failed:",
+      error
+    );
+
+
+    tdxRailSource =
+      "direct fetch failed";
+
+
+    setRailStatus(
+      "TDX Rail: direct access failed",
+      true
+    );
+
+
+    renderRailPreview();
+
+  }
+
+}
+
+
+/* --------------------------------------------
+   Import TDX JSON backup
+-------------------------------------------- */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+
+    const fileInput =
+      document.getElementById(
+        "tdxJsonFile"
+      );
+
+
+    if(fileInput){
+
+      fileInput.addEventListener(
+        "change",
+        async event => {
+
+          const file =
+            event.target.files?.[0];
+
+
+          if(!file){
+            return;
+          }
+
+
+          try{
+
+            const text =
+              await file.text();
+
+
+            const data =
+              JSON.parse(text);
+
+
+            if(
+              !Array.isArray(
+                data.TrainTimetables
+              )
+            ){
+
+              throw new Error(
+                "TrainTimetables missing"
+              );
+
+            }
+
+
+            tdxRailData =
+              data;
+
+
+            tdxRailSource =
+              `Imported: ${file.name}`;
+
+
+            setRailStatus(
+              `TDX Rail: ${
+                data.TrainDate ||
+                "JSON loaded"
+              }`
+            );
+
+
+            renderRailPreview();
+
+          }
+
+
+          catch(error){
+
+            setRailStatus(
+              `JSON error: ${
+                error.message
+              }`,
+              true
+            );
+
+          }
+
+        }
+      );
+
+    }
+
+
+    loadTDXRail();
+
+  }
+);
+
+
+/* ============================================
+   EVENT ADAPTER
+============================================ */
+
+/*
+  下一階段：
+  Replace mockEvents with backend data.
+
+  Example:
+
+  GET /api/events?range=week
+
+  Required fields:
+
+  id
+  title
+  city
+  start
+  end
+  venue
+  category
+  isEvening
+  isIndoor
+  transportModes
+  walkable
+  youbikeOptional
+  officialUrl
+  mapUrl
+*/
+
+
+const mockEvents = [];
+
+
+/* ============================================
+   APP STATE
+============================================ */
+
+let selectedHours =
+  5;
+
+
+let tripFilter =
+  "all";
+
+
+let eventRange =
+  "week";
+
+
+let eventFilter =
+  "all";
+
+
+/* ============================================
+   CURRENT TIME
+============================================ */
+
+function nowHour(){
+
+  const date =
+    new Date();
+
+
+  return (
+    date.getHours() +
+    date.getMinutes() / 60
+  );
+
+}
+
+
+/* ============================================
+   TRIP STATUS
+============================================ */
+
+function tripStatus(trip){
+
+  const hour =
+    nowHour();
+
+
+  if(
+    selectedHours <
+    trip.minHours
+  ){
+
+    return [
+      "NOT NOW",
+      "red",
+      "Not enough time"
+    ];
+
+  }
+
+
+  if(
+    hour >
+    trip.cutoff
+  ){
+
+    return [
+      "CHECK FIRST",
+      "yellow",
+      "Late departure window"
+    ];
+
+  }
+
+
+  if(
+    trip.returnRisk ===
+    "Lowest"
+  ){
+
+    return [
+      "EASY TRIP",
+      "green",
+      "Low return risk"
+    ];
+
+  }
+
+
+  return [
+    "GO NOW",
+    "green",
+    "Fits selected time"
+  ];
+
+}
+
+
+/* ============================================
+   TRIP SCORE
+============================================ */
+
+function tripScore(trip){
+
+  let score =
+    100 -
+    Math.abs(
+      selectedHours -
+      trip.minHours
+    ) * 4;
+
+
+  if(
+    selectedHours <
+    trip.minHours
+  ){
+
+    score -= 100;
+
+  }
+
+
+  if(
+    nowHour() >
+    trip.cutoff
+  ){
+
+    score -= 55;
+
+  }
+
+
+  if(
+    trip.returnRisk ===
+    "Lowest"
+  ){
+
+    score += 12;
+
+  }
+
+
+  if(
+    trip.english === "High" ||
+    trip.english === "Very High"
+  ){
+
+    score += 6;
+
+  }
+
+
+  if(
+    trip.night &&
+    nowHour() >= 17
+  ){
+
+    score += 10;
+
+  }
+
+
+  return score;
+
+}
+
+
+/* ============================================
+   RENDER DESTINATIONS
+============================================ */
+
+function renderTrips(){
+
+  document.getElementById(
+    "tripTitle"
+  ).textContent =
+    `You have ${selectedHours} hours.`;
+
+
+  let list =
+    trips.filter(
+      trip => {
+
+        if(
+          tripFilter ===
+          "all"
+        ){
+          return true;
+        }
+
+
+        if(
+          tripFilter ===
+          "night"
+        ){
+          return trip.night;
+        }
+
+
+        return (
+          trip.category ===
+          tripFilter
+        );
+
+      }
+    );
+
+
+  list =
+    list
+      .sort(
+        (a,b) =>
+          tripScore(b) -
+          tripScore(a)
+      )
+      .slice(
+        0,
+        9
+      );
+
+
+  const box =
+    document.getElementById(
+      "tripCards"
+    );
+
+
+  box.innerHTML =
+    "";
+
+
+  list.forEach(
+    trip => {
+
+      const [
+        label,
+        color,
+        why
+      ] =
+        tripStatus(trip);
+
+
+      const card =
+        document.createElement(
+          "article"
+        );
+
+
+      card.className =
+        "card";
+
+
+      card.innerHTML = `
+
+        <div class="cardhero">
+
+          <div class="kicker">
+            ${trip.city}
+          </div>
+
+          <h3>
+            ${trip.title}
+          </h3>
+
+        </div>
+
+
+        <div class="cardbody">
+
+          <span
+            class="badge ${color}"
+          >
+            ${label}
+          </span>
+
+
+          <div class="meta">
+
+            <div>
+              🚌 ${trip.transport}
+            </div>
+
+            <div>
+              ⏱ Minimum recommended time:
+              ${trip.minHours} h
+            </div>
+
+            <div>
+              🌐 English:
+              ${trip.english}
+            </div>
+
+            <div>
+              ↩ Return risk:
+              ${trip.returnRisk}
+            </div>
+
+            <div>
+              💡 ${why}
+            </div>
+
+          </div>
+
+
+          <div class="actions">
+
+            <button
+              class="btn orange"
+              onclick="openTrip('${trip.id}')"
+            >
+              Can I go now?
+            </button>
+
+
+            <a
+              class="btn ghost"
+              href="${trip.official}"
+              target="_blank"
+              rel="noopener"
+            >
+              Official guide ↗
+            </a>
+
+          </div>
+
+        </div>
+
+      `;
+
+
+      box.appendChild(
+        card
+      );
+
+    }
+  );
+
+}
+
+
+/* ============================================
+   EVENT RANGE
+============================================ */
+
+function inRange(
+  event,
+  range
+){
+
+  const now =
+    new Date();
+
+
+  const end =
+    new Date(
+      event.end
+    );
+
+
+  const start =
+    new Date(
+      event.start
+    );
+
+
+  if(
+    end < now
+  ){
+    return false;
+  }
+
+
+  if(
+    range === "week"
+  ){
+
+    const weekEnd =
+      new Date(now);
+
+
+    weekEnd.setDate(
+      now.getDate() + 7
+    );
+
+
+    return (
+      start <= weekEnd &&
+      end >= now
+    );
+
+  }
+
+
+  const monthEnd =
+    new Date(
+      now.getFullYear(),
+      now.getMonth() + 1,
+      0,
+      23,
+      59,
+      59
+    );
+
+
+  return (
+    start <= monthEnd &&
+    end >= now
+  );
+
+}
+
+
+/* ============================================
+   EVENT TRANSPORT FILTER
+============================================ */
+
+function eventAccessible(
+  event
+){
+
+  const allowed =
+    (
+      event.transportModes ||
+      []
+    ).every(
+      mode =>
+        [
+          "TRA",
+          "MRT",
+          "LRT",
+          "BUS",
+          "WALK",
+          "YOUBIKE"
+        ].includes(mode)
+    );
+
+
+  return (
+    allowed &&
+    event.walkable === true
+  );
+
+}
+
+
+/* ============================================
+   RENDER EVENTS
+============================================ */
+
+function renderEvents(){
+
+  const box =
+    document.getElementById(
+      "eventCards"
+    );
+
+
+  box.innerHTML =
+    "";
+
+
+  let list =
+    mockEvents.filter(
+      event =>
+        inRange(
+          event,
+          eventRange
+        ) &&
+        eventAccessible(
+          event
+        )
+    );
+
+
+  if(
+    eventFilter ===
+    "night"
+  ){
+
+    list =
+      list.filter(
+        event =>
+          event.isEvening
+      );
+
+  }
+
+
+  if(
+    eventFilter ===
+    "indoor"
+  ){
+
+    list =
+      list.filter(
+        event =>
+          event.isIndoor
+      );
+
+  }
+
+
+  if(
+    !list.length
+  ){
+
+    box.innerHTML = `
+
+      <div
+        class="empty"
+        style="grid-column:1/-1"
+      >
+
+        Live event feed is not connected yet.
+
+        <br>
+
+
+        <a
+          class="btn ghost"
+          style="margin-top:10px"
+          target="_blank"
+          rel="noopener"
+          href="${official.kaohsiungEvents}"
+        >
+          Open official Kaohsiung event calendar ↗
+        </a>
+
+      </div>
+
+    `;
+
+
+    return;
+
+  }
+
+
+  list.forEach(
+    event => {
+
+      const card =
+        document.createElement(
+          "article"
+        );
+
+
+      card.className =
+        "card";
+
+
+      card.innerHTML = `
+
+        <div class="cardhero">
+
+          <div class="kicker">
+            ${event.city}
+          </div>
+
+          <h3>
+            ${event.title}
+          </h3>
+
+        </div>
+
+
+        <div class="cardbody">
+
+          <span class="badge blue">
+
+            ${
+              eventRange === "week"
+                ? "THIS WEEK"
+                : "THIS MONTH"
+            }
+
+          </span>
+
+
+          <div class="meta">
+
+            <div>
+              📅 ${event.start}
+              →
+              ${event.end}
+            </div>
+
+            <div>
+              📍 ${event.venue}
+            </div>
+
+            <div>
+              🚆 ${
+                (
+                  event.transportModes ||
+                  []
+                ).join(" + ")
+              }
+            </div>
+
+          </div>
+
+
+          <div class="actions">
+
+            <a
+              class="btn orange"
+              target="_blank"
+              rel="noopener"
+              href="${event.mapUrl}"
+            >
+              Navigate ↗
+            </a>
+
+
+            <a
+              class="btn ghost"
+              target="_blank"
+              rel="noopener"
+              href="${event.officialUrl}"
+            >
+              Official event ↗
+            </a>
+
+          </div>
+
+        </div>
+
+      `;
+
+
+      box.appendChild(
+        card
+      );
+
+    }
+  );
+
+}
+
+
+/* ============================================
+   OPEN DESTINATION MODAL
+============================================ */
 
 function openTrip(id){
-  const t=trips.find(x=>x.id===id); if(!t)return;
-  const [label,color,why]=tripStatus(t);
-  document.getElementById("mCity").textContent=t.city;
-  document.getElementById("mTitle").textContent=t.title;
-  document.getElementById("mStatus").innerHTML=`<span class="badge ${color}">${label}</span> <span class="small">${why}</span>`;
-  document.getElementById("mChecks").innerHTML=t.checks.map(x=>`<div class="check">✓ ${x}</div>`).join("");
-  document.getElementById("mSteps").innerHTML=t.steps.map((x,i)=>`<div class="step"><b>${i+1}.</b> ${x}</div>`).join("");
-  document.getElementById("mActions").innerHTML=`<a class="btn orange" target="_blank" rel="noopener" href="${t.map}">Google Maps ↗</a><a class="btn" target="_blank" rel="noopener" href="${t.official}">Official Guide ↗</a>`;
-  document.getElementById("modal").classList.add("open");
-}
-function closeModal(){document.getElementById("modal").classList.remove("open")}
-document.getElementById("modal").addEventListener("click",e=>{if(e.target.id==="modal")closeModal()});
-function jump(id){document.getElementById(id).scrollIntoView({behavior:"smooth"})}
 
-document.querySelectorAll(".timebtn").forEach(b=>b.addEventListener("click",()=>{
-  document.querySelectorAll(".timebtn").forEach(x=>x.classList.remove("active"));
-  b.classList.add("active"); selectedHours=Number(b.dataset.hours); renderTrips();
-}));
-document.querySelectorAll(".tripfilter").forEach(b=>b.addEventListener("click",()=>{
-  document.querySelectorAll(".tripfilter").forEach(x=>x.classList.remove("active"));
-  b.classList.add("active"); tripFilter=b.dataset.filter; renderTrips();
-}));
-document.querySelectorAll(".eventtab").forEach(b=>b.addEventListener("click",()=>{
-  document.querySelectorAll(".eventtab").forEach(x=>x.classList.remove("active"));
-  b.classList.add("active"); eventRange=b.dataset.range; renderEvents();
-}));
-document.querySelectorAll(".eventfilter").forEach(b=>b.addEventListener("click",()=>{
-  document.querySelectorAll(".eventfilter").forEach(x=>x.classList.remove("active"));
-  b.classList.add("active"); eventFilter=b.dataset.mode; renderEvents();
-}));
+  const trip =
+    trips.find(
+      item =>
+        item.id === id
+    );
+
+
+  if(!trip){
+    return;
+  }
+
+
+  const [
+    label,
+    color,
+    why
+  ] =
+    tripStatus(trip);
+
+
+  document.getElementById(
+    "mCity"
+  ).textContent =
+    trip.city;
+
+
+  document.getElementById(
+    "mTitle"
+  ).textContent =
+    trip.title;
+
+
+  let liveRail =
+    "";
+
+
+  /*
+    Tainan Old Town
+    使用 TDX Rail
+  */
+
+  if(
+    trip.id ===
+    "tainan"
+  ){
+
+    const nextTrain =
+      upcomingRail(1)[0];
+
+
+    if(nextTrain){
+
+      document.getElementById(
+        "mStatus"
+      ).innerHTML = `
+
+        <span class="badge green">
+          TRAIN AVAILABLE
+        </span>
+
+        <span class="small">
+
+          Next:
+
+          ${
+            safeText(
+              nextTrain.departure
+            )
+          }
+
+          →
+
+          ${
+            safeText(
+              nextTrain.arrival
+            )
+          }
+
+          ·
+
+          ${
+            durationText(
+              nextTrain.duration
+            )
+          }
+
+        </span>
+
+      `;
+
+    }
+
+
+    else{
+
+      document.getElementById(
+        "mStatus"
+      ).innerHTML = `
+
+        <span
+          class="badge ${color}"
+        >
+          ${label}
+        </span>
+
+        <span class="small">
+          ${why}
+        </span>
+
+      `;
+
+    }
+
+
+    liveRail =
+      railModalHTML();
+
+  }
+
+
+  else{
+
+    document.getElementById(
+      "mStatus"
+    ).innerHTML = `
+
+      <span
+        class="badge ${color}"
+      >
+        ${label}
+      </span>
+
+      <span class="small">
+        ${why}
+      </span>
+
+    `;
+
+  }
+
+
+  document.getElementById(
+    "mChecks"
+  ).innerHTML =
+
+    liveRail +
+
+    trip.checks
+      .map(
+        item =>
+          `
+          <div class="check">
+            ✓ ${item}
+          </div>
+          `
+      )
+      .join("");
+
+
+  document.getElementById(
+    "mSteps"
+  ).innerHTML =
+
+    trip.steps
+      .map(
+        (item,index) =>
+          `
+          <div class="step">
+
+            <b>
+              ${index + 1}.
+            </b>
+
+            ${item}
+
+          </div>
+          `
+      )
+      .join("");
+
+
+  document.getElementById(
+    "mActions"
+  ).innerHTML = `
+
+    <a
+      class="btn orange"
+      target="_blank"
+      rel="noopener"
+      href="${trip.map}"
+    >
+      Google Maps ↗
+    </a>
+
+
+    <a
+      class="btn"
+      target="_blank"
+      rel="noopener"
+      href="${trip.official}"
+    >
+      Official Guide ↗
+    </a>
+
+  `;
+
+
+  const note =
+    document.getElementById(
+      "modalDataNote"
+    );
+
+
+  if(note){
+
+    note.textContent =
+
+      (
+        trip.id ===
+        "tainan"
+        &&
+        tdxRailData
+      )
+
+      ?
+
+      `Rail times shown above come from the loaded TDX DailyTrainTimetable (${tdxRailSource}). Walking / YouBike and attraction feasibility remain planning estimates in this POC.`
+
+      :
+
+      "Prototype note: non-TDX travel times remain planning estimates.";
+
+  }
+
+
+  document.getElementById(
+    "modal"
+  ).classList.add(
+    "open"
+  );
+
+}
+
+
+/* ============================================
+   CLOSE MODAL
+============================================ */
+
+function closeModal(){
+
+  document.getElementById(
+    "modal"
+  ).classList.remove(
+    "open"
+  );
+
+}
+
+
+document.getElementById(
+  "modal"
+).addEventListener(
+  "click",
+  event => {
+
+    if(
+      event.target.id ===
+      "modal"
+    ){
+
+      closeModal();
+
+    }
+
+  }
+);
+
+
+/* ============================================
+   SMOOTH SCROLL
+============================================ */
+
+function jump(id){
+
+  document.getElementById(
+    id
+  ).scrollIntoView({
+    behavior:"smooth"
+  });
+
+}
+
+
+/* ============================================
+   TIME BUTTONS
+============================================ */
+
+document.querySelectorAll(
+  ".timebtn"
+).forEach(
+  button =>
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        document.querySelectorAll(
+          ".timebtn"
+        ).forEach(
+          item =>
+            item.classList.remove(
+              "active"
+            )
+        );
+
+
+        button.classList.add(
+          "active"
+        );
+
+
+        selectedHours =
+          Number(
+            button.dataset.hours
+          );
+
+
+        renderTrips();
+
+      }
+    )
+
+);
+
+
+/* ============================================
+   TRIP FILTERS
+============================================ */
+
+document.querySelectorAll(
+  ".tripfilter"
+).forEach(
+  button =>
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        document.querySelectorAll(
+          ".tripfilter"
+        ).forEach(
+          item =>
+            item.classList.remove(
+              "active"
+            )
+        );
+
+
+        button.classList.add(
+          "active"
+        );
+
+
+        tripFilter =
+          button.dataset.filter;
+
+
+        renderTrips();
+
+      }
+    )
+
+);
+
+
+/* ============================================
+   EVENT RANGE
+============================================ */
+
+document.querySelectorAll(
+  ".eventtab"
+).forEach(
+  button =>
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        document.querySelectorAll(
+          ".eventtab"
+        ).forEach(
+          item =>
+            item.classList.remove(
+              "active"
+            )
+        );
+
+
+        button.classList.add(
+          "active"
+        );
+
+
+        eventRange =
+          button.dataset.range;
+
+
+        renderEvents();
+
+      }
+    )
+
+);
+
+
+/* ============================================
+   EVENT FILTER
+============================================ */
+
+document.querySelectorAll(
+  ".eventfilter"
+).forEach(
+  button =>
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        document.querySelectorAll(
+          ".eventfilter"
+        ).forEach(
+          item =>
+            item.classList.remove(
+              "active"
+            )
+        );
+
+
+        button.classList.add(
+          "active"
+        );
+
+
+        eventFilter =
+          button.dataset.mode;
+
+
+        renderEvents();
+
+      }
+    )
+
+);
+
+
+/* ============================================
+   CLOCK
+============================================ */
 
 function tick(){
-  const d=new Date();
-  document.getElementById("clock").textContent="Current time: "+d.toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"});
+
+  const date =
+    new Date();
+
+
+  document.getElementById(
+    "clock"
+  ).textContent =
+
+    "Current time: " +
+
+    date.toLocaleTimeString(
+      [],
+      {
+        hour:"2-digit",
+        minute:"2-digit"
+      }
+    );
+
 }
-setInterval(tick,1000); tick(); renderTrips(); renderEvents();
+
+
+/* ============================================
+   START APP
+============================================ */
+
+setInterval(
+  tick,
+  1000
+);
+
+
+tick();
+
+renderTrips();
+
+renderEvents();
+
 </script>
+
 </body>
 </html>
