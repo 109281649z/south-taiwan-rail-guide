@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>South Taiwan Rail Escapes - Half-Day & Full-Day Trips from Kaohsiung Station</title>
+  <title>South Taiwan Rail Escapes - Transit, Bike & Live October Events</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Google Fonts -->
@@ -20,26 +20,68 @@
   <header class="border-b border-slate-200 bg-white py-12 px-6 sm:px-12">
     <div class="max-w-5xl mx-auto">
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 mb-4">
-        <span>● Starting Point: Kaohsiung Main Station (TRA)</span>
+        <span>● Transit Hub: Kaohsiung Main Station (TRA / MRT)</span>
       </div>
       <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">
         Explore South Taiwan by Rail, Metro & Ubike
       </h1>
       <p class="mt-3 text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed">
-        Curated English-friendly destinations across Kaohsiung, Tainan, Pingtung, and Chiayi. Accessible via public transit with zero rental car required.
+        Curated English-friendly destinations and live seasonal events across Kaohsiung, Tainan, Pingtung, and Chiayi. Accessible 100% by public transit.
       </p>
 
       <!-- Essential Rider Note -->
       <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs text-slate-600 bg-slate-50 p-4 rounded-xl border border-slate-200">
         <div><strong class="text-slate-800">Transit Pass:</strong> Tap with EasyCard or iPASS for TRA local trains, MRT, and light rail.</div>
-        <div><strong class="text-slate-800">Ubike 2.0:</strong> Single rentals available using credit cards at any kiosk or mobile app.</div>
-        <div><strong class="text-slate-800">Direct Navigation:</strong> Tap "Get Directions" below to launch Google Maps from your current GPS location.</div>
+        <div><strong class="text-slate-800">Ubike 2.0:</strong> Single rentals available using credit cards at any street station or via app.</div>
+        <div><strong class="text-slate-800">Live Navigation:</strong> Tap "Get Directions" to launch GPS transit guidance from your exact location.</div>
+      </div>
+
+      <!-- Official Themed Guides Banner -->
+      <div class="mt-4 p-4 rounded-xl bg-slate-900 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+        <div>
+          <span class="font-bold text-amber-400 uppercase tracking-wider block">Official Kaohsiung Themed Routes</span>
+          <span class="text-slate-300">Ready-made low-carbon itineraries designed by Kaohsiung Travel:</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <a href="https://khh.travel/en/travel/low-carbon-artery/" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition-colors text-white whitespace-nowrap">
+            🌱 Low-Carbon Artery ↗
+          </a>
+          <a href="https://khh.travel/en/travel/lightrail-artery/" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 transition-colors text-white whitespace-nowrap">
+            🚋 Light Rail Artery ↗
+          </a>
+        </div>
       </div>
     </div>
   </header>
 
+  <!-- Live Seasonal Events Section -->
+  <section class="max-w-5xl mx-auto pt-10 px-6 sm:px-12">
+    <div class="bg-gradient-to-br from-amber-500/10 via-white to-slate-50 border border-amber-200/70 rounded-2xl p-6 sm:p-8">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-4 mb-6">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-amber-800">What's On Right Now</span>
+          <h2 class="text-xl sm:text-2xl font-bold text-slate-900">October 2026 Seasonal Events</h2>
+        </div>
+        <div id="current-date-badge" class="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full bg-amber-100 text-amber-900 border border-amber-300 self-start sm:self-auto">
+          📅 Today: October 2026
+        </div>
+      </div>
+
+      <!-- Events Filter Tabs -->
+      <div class="flex items-center gap-2 mb-6">
+        <button onclick="switchEventTab('all')" id="btn-ev-all" class="px-3 py-1 rounded-lg text-xs font-semibold bg-amber-600 text-white">All October Events (6)</button>
+        <button onclick="switchEventTab('today')" id="btn-ev-today" class="px-3 py-1 rounded-lg text-xs font-semibold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100">Happening Today</button>
+      </div>
+
+      <!-- Events Grid -->
+      <div id="events-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Event cards injected by JS -->
+      </div>
+    </div>
+  </section>
+
   <!-- Filter Section -->
-  <section class="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-slate-200 py-4 px-6 sm:px-12">
+  <section class="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-slate-200 py-4 px-6 sm:px-12 mt-10">
     <div class="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-4">
       <div class="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0" id="filter-container">
         <button onclick="filterDestinations('all')" class="filter-btn active px-4 py-1.5 rounded-full text-xs font-semibold border transition-colors bg-slate-900 text-white border-slate-900" data-filter="all">All Trips</button>
@@ -54,18 +96,117 @@
   <!-- Destination Cards Grid -->
   <main class="max-w-5xl mx-auto py-10 px-6 sm:px-12">
     <div id="cards-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <!-- Cards populated dynamically -->
+      <!-- Destination cards injected by JS -->
     </div>
   </main>
 
   <!-- Footer -->
   <footer class="border-t border-slate-200 bg-white py-8 px-6 text-center text-xs text-slate-400">
-    <p>Data compiled for independent international travelers visiting Southern Taiwan.</p>
+    <p>Curated for independent international travelers exploring Southern Taiwan via public transit & shared bikes.</p>
   </footer>
 
   <!-- Application Logic & Data -->
   <script>
+    // October 2026 Curated Events (Kaohsiung, Tainan, Pingtung, Chiayi)
+    const eventsData = [
+      {
+        id: "ev-wannian",
+        title: "Zuoying Wannian Folklore Festival",
+        city: "Kaohsiung",
+        period: "Mid-October (Annual Highlight)",
+        location: "Lotus Pond Scenic Area (Zuoying)",
+        transit: "TRA 1 stop (5 mins) to Zuoying Station → 7-min walk or Ubike.",
+        description: "Kaohsiung's signature temple festival featuring the iconic Fire Lion parade, traditional food stalls, and lakefront ceremonies.",
+        highlightTag: "Folklore & Night Market",
+        lat: 22.6803,
+        lng: 120.2917,
+        link: "https://khh.travel/en/travel/low-carbon-artery/"
+      },
+      {
+        id: "ev-weiwuying-anniv",
+        title: "Weiwuying Open House & Autumn Arts",
+        city: "Kaohsiung",
+        period: "October 1 – 31, 2026",
+        location: "Weiwuying Center for the Arts",
+        transit: "MRT Orange Line directly to Weiwuying Station (Exit 6).",
+        description: "Month-long celebrations featuring open-air sunset performances under the Banyan Plaza and free architectural access.",
+        highlightTag: "Performing Arts & Music",
+        lat: 22.6247,
+        lng: 120.3435,
+        link: "https://khh.travel/en/travel/low-carbon-artery/"
+      },
+      {
+        id: "ev-pier2-market",
+        title: "Pier-2 Harbor Weekend Craft Market",
+        city: "Kaohsiung",
+        period: "Saturdays & Sundays in October",
+        isWeekendOnly: true,
+        location: "Dayi Warehouse Cluster, Pier-2",
+        transit: "LRT to Dayi Pier-2 Station or MRT to Yanchengpu Station.",
+        description: "Bustling seaside artisan market along the waterfront featuring local crafts, Taiwanese snacks, and street performers.",
+        highlightTag: "Handicrafts & Street Food",
+        lat: 22.6199,
+        lng: 120.2815,
+        link: "https://khh.travel/en/travel/lightrail-artery/"
+      },
+      {
+        id: "ev-tainan-autumn",
+        title: "Tainan Historic Autumn Heritage Walk",
+        city: "Tainan",
+        period: "October 1 – 31, 2026",
+        location: "Chikan Tower & Confucius Temple Area",
+        transit: "TRA 32 mins to Tainan Station → Ubike 2.0 to Cultural District.",
+        description: "Enjoy cooler autumn breezes while cycling between ancient temple courtyards, stone alleys, and lit-up museum grounds.",
+        highlightTag: "Heritage & Cycling",
+        lat: 22.9975,
+        lng: 120.2025,
+        link: "https://www.twtainan.net/en/attractions/detail/580"
+      },
+      {
+        id: "ev-pingtung-reading",
+        title: "Shengli Star Village Craft & Reading Month",
+        city: "Pingtung",
+        period: "October 1 – 31, 2026",
+        location: "Shengli Star Village Creative Park",
+        transit: "TRA Express Southbound 22 mins to Pingtung Station → 6-min Ubike.",
+        description: "Experience open-air tea culture and Japanese wooden bookstore events within Taiwan's largest preserved military dorm cluster.",
+        highlightTag: "Heritage Village & Tea",
+        lat: 22.6775,
+        lng: 120.4862,
+        link: "https://eng.taiwan.net.tw/m1.aspx?sNo=0002122&id=A12-00445"
+      },
+      {
+        id: "ev-chiayi-forestry",
+        title: "Chiayi Wood Design & Forestry Festival",
+        city: "Chiayi",
+        period: "October 1 – 31, 2026",
+        location: "Chiayi Sawmill & Forest Railway Garage Park",
+        transit: "TRA Express Northbound 1 hr 15 mins to Chiayi Station → 8-min Ubike.",
+        description: "Historic steam locomotives on display alongside cypress woodworking workshops right across from Hinoki Village.",
+        highlightTag: "Forest Railway & Craft",
+        lat: 23.4870,
+        lng: 120.4552,
+        link: "https://eng.taiwan.net.tw/m1.aspx?sNo=0002117&id=A12-00361"
+      }
+    ];
+
+    // Destinations Master Data
     const destinations = [
+      {
+        id: "pier-2",
+        title: "The Pier-2 Art Center & Harbor",
+        city: "Kaohsiung City",
+        category: "kaohsiung-metro",
+        duration: "Half-Day (~3-4 hrs)",
+        isHalfDay: true,
+        tagline: "Dynamic revitalized seaside warehouse district loaded with outdoor installations, galleries, and harbor views.",
+        transitSteps: "MRT Red Line to Formosa Boulevard → Orange Line to Yanchengpu Station (Exit 1) → 5-min walk or ride Kaohsiung LRT to Dayi Pier-2 Station.",
+        englishFriendliness: "High. English park maps, visitor centers, bilingual outdoor art placards.",
+        insiderTip: "Rent a Ubike at Yanchengpu Station to coast along the waterfront bike trail seamlessly towards Great Harbor Bridge.",
+        lat: 22.6199,
+        lng: 120.2815,
+        officialUrl: "https://khh.travel/en/travel/lightrail-artery/"
+      },
       {
         id: "chimei-museum",
         title: "Chimei Museum",
@@ -82,19 +223,19 @@
         officialUrl: "https://www.chimeimuseum.org/"
       },
       {
-        id: "pier-2",
-        title: "The Pier-2 Art Center & Harbor",
+        id: "neiwei-kmfa",
+        title: "Neiwei Arts Center & Fine Arts Park",
         city: "Kaohsiung City",
         category: "kaohsiung-metro",
-        duration: "Half-Day (~3-4 hrs)",
+        duration: "Half-Day (~2-3 hrs)",
         isHalfDay: true,
-        tagline: "Dynamic revitalized seaside warehouse district loaded with outdoor installations, galleries, and harbor views.",
-        transitSteps: "MRT Red Line to Formosa Boulevard → Orange Line to Yanchengpu Station (Exit 1) → 5-min walk or ride Kaohsiung LRT to Dayi Pier-2 Station.",
-        englishFriendliness: "High. English park maps, visitor centers, bilingual outdoor art placards.",
-        insiderTip: "Rent a Ubike at Yanchengpu Station to coast along the waterfront bike trail seamlessly towards Great Harbor Bridge.",
-        lat: 22.6199,
-        lng: 120.2815,
-        officialUrl: "https://khh.travel/en/attractions/detail/22"
+        tagline: "Sleek contemporary art center and sprawling sculpture park, famous for the shaded green 'Totoro Light Rail Tunnel'.",
+        transitSteps: "TRA Train 2 stops to Neiwei Station (6 mins) OR ride Light Rail (LRT) to Neiwei Arts Center Station (C32).",
+        englishFriendliness: "Bilingual museum exhibits, cafe menus, and accessible park wayfinding.",
+        insiderTip: "Great spot for an afternoon coffee after strolling through the open-air sculpture grounds.",
+        lat: 22.6572,
+        lng: 120.2858,
+        officialUrl: "https://khh.travel/en/travel/lightrail-artery/"
       },
       {
         id: "tainan-heritage",
@@ -124,7 +265,7 @@
         insiderTip: "Cultural tradition: Enter through the dragon's mouth and exit from the tiger's jaws for good fortune.",
         lat: 22.6803,
         lng: 120.2917,
-        officialUrl: "https://khh.travel/en/attractions/detail/20"
+        officialUrl: "https://khh.travel/en/travel/low-carbon-artery/"
       },
       {
         id: "victorystar",
@@ -154,7 +295,7 @@
         insiderTip: "The outdoor Banyan Plaza is completely free and sheltered—perfect for cooling off on hot afternoons.",
         lat: 22.6247,
         lng: 120.3435,
-        officialUrl: "https://khh.travel/en/attractions/detail/29"
+        officialUrl: "https://khh.travel/en/travel/low-carbon-artery/"
       },
       {
         id: "fo-guang-shan",
@@ -169,7 +310,7 @@
         insiderTip: "Take the Harvard Express bus from Zuoying Station rather than local bus routes to save over 40 minutes.",
         lat: 22.7565,
         lng: 120.4475,
-        officialUrl: "https://khh.travel/en/attractions/detail/26"
+        officialUrl: "https://www.fgsbmc.org.tw/en/index.aspx"
       },
       {
         id: "hinoki-village",
@@ -187,6 +328,74 @@
         officialUrl: "https://eng.taiwan.net.tw/m1.aspx?sNo=0002117&id=A12-00361"
       }
     ];
+
+    // Real-time Date Processing
+    const now = new Date();
+    const currentDay = now.getDate();
+    const currentMonth = now.toLocaleString('en-US', { month: 'short' });
+    const currentYear = now.getFullYear();
+    const dayOfWeek = now.getDay();
+    const isTodayWeekend = (dayOfWeek === 0 || dayOfWeek === 6);
+
+    document.getElementById("current-date-badge").innerText = `📅 Today: ${currentMonth} ${currentDay}, ${currentYear}`;
+
+    function renderEvents(filterType) {
+      const container = document.getElementById("events-grid");
+      container.innerHTML = "";
+
+      let filtered = eventsData;
+      if (filterType === 'today') {
+        filtered = eventsData.filter(ev => {
+          if (ev.isWeekendOnly) return isTodayWeekend;
+          return true;
+        });
+      }
+
+      filtered.forEach(ev => {
+        const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${ev.lat},${ev.lng}&travelmode=transit`;
+        const card = document.createElement("div");
+        card.className = "bg-white p-5 rounded-xl border border-slate-200/90 shadow-sm flex flex-col justify-between";
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <div class="flex items-center gap-1.5">
+                <span class="text-xs font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-700">${ev.city}</span>
+                <span class="text-xs font-semibold px-2 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200">${ev.highlightTag}</span>
+              </div>
+              <span class="text-xs text-slate-400 font-medium">${ev.period}</span>
+            </div>
+            <h3 class="text-base font-bold text-slate-900">${ev.title}</h3>
+            <p class="text-xs text-slate-600 mt-1 leading-relaxed">${ev.description}</p>
+            <div class="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-500">
+              <span class="font-bold text-slate-800">Transit:</span> ${ev.transit}
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold">
+            <a href="${directionsUrl}" target="_blank" rel="noopener noreferrer" class="text-emerald-700 hover:text-emerald-800">
+              📍 Navigate There ↗
+            </a>
+            <a href="${ev.link}" target="_blank" rel="noopener noreferrer" class="text-slate-600 hover:text-slate-900">
+              Learn More ↗
+            </a>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function switchEventTab(type) {
+      const btnAll = document.getElementById("btn-ev-all");
+      const btnToday = document.getElementById("btn-ev-today");
+
+      if (type === 'all') {
+        btnAll.className = "px-3 py-1 rounded-lg text-xs font-semibold bg-amber-600 text-white";
+        btnToday.className = "px-3 py-1 rounded-lg text-xs font-semibold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100";
+      } else {
+        btnToday.className = "px-3 py-1 rounded-lg text-xs font-semibold bg-amber-600 text-white";
+        btnAll.className = "px-3 py-1 rounded-lg text-xs font-semibold bg-white text-slate-600 border border-slate-200 hover:bg-slate-100";
+      }
+      renderEvents(type);
+    }
 
     function renderCards(data) {
       const container = document.getElementById("cards-grid");
@@ -227,7 +436,7 @@
               <span>📍 Get Directions (Transit) ↗</span>
             </a>
             <a href="${item.officialUrl}" target="_blank" rel="noopener noreferrer" class="text-slate-600 hover:text-slate-900 transition-colors">
-              Official Site ↗
+              Official Guide ↗
             </a>
           </div>
         `;
@@ -256,6 +465,7 @@
     }
 
     // Initial render
+    renderEvents('all');
     renderCards(destinations);
   </script>
 </body>
